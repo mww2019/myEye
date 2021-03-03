@@ -38,11 +38,14 @@ $columns = array(
         $nestedData = array();
         $nestedData[] = $no;
         $nestedData[] = $row["pro_code"];
+        $nestedData[] = ucwords($row["pro_name"]);
+        $nestedData[] = ucwords($row["sup_name"]);
         $nestedData[] = $row["purchase_price"];
         $nestedData[] = $row["selling_price"];
         $nestedData[] = $row["tax"];
         $nestedData[] = $row["quantity"];
-        $nestedData[] = date('M, d Y', strtotime($row["dte_created"]));
+        $nestedData[] = date('M, d Y', strtotime($row["pur_dte"]));
+        $nestedData[] = '<button type="button" data-toggle="modal" data-target="#framePurUpModal" data-vendor='. $row['id'] .' class="btn btn-primary waves-effect actionBtn upModelBtn" title="Edit"><i class="material-icons">edit</i></button>&nbsp;&nbsp;<button onclick="delPurFrame('. $row['id'] .')" type="button" class="btn btn-danger waves-effect actionBtn" title="Delete"><i class="material-icons">delete</i></button>';
 
         $data[] = $nestedData;
         $no++;

@@ -8,6 +8,8 @@ $dateTime	=	date('Y-m-d H:i:s');
 
 $pro_code 	= $_POST['code']?$_POST['code']:'NA';
 $pro_name 	= $_POST['f_name']?strtolower($_POST['f_name']):'NA';
+$sup_name	= $_POST['sName'];
+$pur_dte	= $_POST['pDte'];
 $pur_price 	= $_POST['pur_price']?$_POST['pur_price']:0;
 $sell_price = $_POST['sell_price']?$_POST['sell_price']:0;
 $tax 		= $_POST['tax']?$_POST['tax']:0;
@@ -22,7 +24,7 @@ $new_quantity = $quantity + $pre_quant;
 
 $sqlData1 = "UPDATE product_frame SET purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$new_quantity', dte_modified='$dateTime' WHERE code='$pro_code'  ";
 
-$sqlData = "INSERT INTO product_purches (pro_code, pro_name, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$pro_name', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
+$sqlData = "INSERT INTO product_purches (pro_code, pro_name, sup_name, pur_dte, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$pro_name', '$sup_name', '$pur_dte', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$conn->query($sqlData1);

@@ -64,7 +64,7 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">shopping_cart</i>
-                            <span>Purches</span>
+                            <span>Purchase</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
