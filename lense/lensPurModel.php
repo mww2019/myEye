@@ -1,15 +1,15 @@
-<!-- Add Frame Purches Model -->
-    <div class="modal fade" id="framePurAddModal" tabindex="-1" role="dialog">
+<!-- Add Lens Purches Model -->
+    <div class="modal fade" id="lensPurAddModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">PURCHASE FRAME</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">PURCHASE CONTACT LENS</h4>
                 </div>
                 <hr/>
                 <div class="modal-body">
-                    <form method="post" action="./frame/addPurFrameData.php">
+                    <form method="post" action="./lense/addPurLensData.php">
                         <div class="col-sm-3">
-                            <label for="code">Frame Code</label>
+                            <label for="code">Lens Code</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick" name="code" id="code" required>
@@ -43,10 +43,10 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <label for="pro_code">Frame Name</label>
+                            <label for="pro_code">Lens Name</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="f_name" name="f_name" class="form-control" readonly placeholder="Frame Name">
+                                    <input type="text" id="f_name" name="f_name" class="form-control" readonly placeholder="Lens Name">
                                 </div>
                             </div>
                         </div>
@@ -124,20 +124,20 @@
     </div>
 
 
-<!-- Update Frame Purches Model -->
-    <div class="modal fade" id="framePurUpModal" tabindex="-1" role="dialog">
+<!-- Update Lens Purches Model -->
+    <div class="modal fade" id="lensPurUpModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">UPDATE PURCHASE FRAME</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">UPDATE CONTACT LENS PURCHASE</h4>
                 </div>
                 <hr/>
                 <div class="modal-body">
-                    <form method="post" action="./frame/upPurFrameData.php">
+                    <form method="post" action="./lense/upPurLensData.php">
                         <input type="hidden" name="purID" id="purID">
                         <input type="hidden" name="sENme" id="sENme">
                         <div class="col-sm-3">
-                            <label for="code">Frame Code</label>
+                            <label for="code">Lens Code</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="edit_code" name="code" class="form-control" readonly>
@@ -166,10 +166,10 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <label for="pro_code">Frame Name</label>
+                            <label for="pro_code">Lens Name</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="edit_f_name" name="f_name" class="form-control" readonly placeholder="Frame Name">
+                                    <input type="text" id="edit_f_name" name="f_name" class="form-control" readonly placeholder="Lens Name">
                                 </div>
                             </div>
                         </div>

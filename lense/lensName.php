@@ -6,7 +6,7 @@ $code = $_POST['id'];
 
 include '../comm/db.php';
 
-$data = "SELECT * FROM product_frame WHERE code='$code' ";
+$data = "SELECT * FROM contact_lenses WHERE code='$code' ";
 $resultData = mysqli_query($conn,$data);
 $rData = mysqli_fetch_assoc($resultData);
 

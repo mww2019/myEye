@@ -19,9 +19,15 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Add Frames Purchase | My Eye Care</title>
     <?php include('./comm/headerLinks.php') ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
     <style type="text/css">
         .actionBtn{
             padding: 2px 5px;
+        }
+        .selectize-input {
+            border: 0px solid #ccc;
+            padding: 0px;
+            min-height: 28px;
         }
     </style>
 </head>
@@ -78,6 +84,7 @@
     <?php include('./frame/framePurModel.php'); ?>
 
     <script src="./plugins/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
     <script src="./plugins/bootstrap/js/bootstrap.js"></script>
     <!-- <script src="./plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
     <script src="./plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -111,6 +118,11 @@
           if (unicode != 8)
             if ((unicode < 48 || unicode > 57) && unicode != 46) return false;
         }
+        $(document).ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
     </script>
 
     <script type="text/javascript">
@@ -199,13 +211,15 @@
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
                         document.getElementById('edit_code').value  = dataResult['pro_code'];
-                        document.getElementById('edit_sName').value = dataResult['sup_name'];
+                        document.getElementById('edit_sName-selectized').value = toUpper(dataResult['sup_name']);
                         document.getElementById('edit_pDte').value = dataResult['pur_dte'];
                         document.getElementById('edit_f_name').value = toUpper(dataResult['pro_name']);
                         document.getElementById('edit_pur_price').value = dataResult['purchase_price'];
                         document.getElementById('edit_sell_price').value = dataResult['selling_price'];
                         document.getElementById('edit_quantity').value = dataResult['quantity'];
                         document.getElementById('edit_tax').value = dataResult['tax'];
+
+                        document.getElementById('sENme').value = document.getElementById('edit_sName-selectized').value;
                     }
                 });
         });

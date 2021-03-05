@@ -10,7 +10,7 @@ $data = "SELECT * FROM product_goggle WHERE code='$code' ";
 $resultData = mysqli_query($conn,$data);
 $rData = mysqli_fetch_assoc($resultData);
 
-$name 		= $rData['name']?$rData['name']:'goggle name';
+$name 		= $rData['name']?$rData['name']:'none';
 $p_price 	= $rData['purchase_price']?$rData['purchase_price']:'0.00';
 $s_price 	= $rData['selling_price']?$rData['selling_price']:'0.00';
 $tax 		= $rData['tax']?$rData['tax']:'0.00';

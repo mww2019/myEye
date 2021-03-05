@@ -29,7 +29,7 @@ if($preQF_quant == $quantity){
 } else {
 	$qty = $quantity - $preQF_quant;
 	
-	$qtyFetch = "SELECT quantity FROM product_frame WHERE code='$pro_code'"; 
+	$qtyFetch = "SELECT quantity FROM contact_lenses WHERE code='$pro_code'"; 
 	$qtyFetchResult = $conn->query($qtyFetch)->fetch_all(MYSQLI_ASSOC);
 	$pre_quant = $qtyFetchResult[0]['quantity'];
 	$new_quantity = $qty + $pre_quant;
@@ -40,7 +40,7 @@ if($preQF_quant == $quantity){
 	// die;
 }
 
-$sqlData1 = "UPDATE product_frame SET purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$new_quantity', dte_modified='$dateTime' WHERE code='$pro_code'  ";
+$sqlData1 = "UPDATE contact_lenses SET purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$new_quantity', dte_modified='$dateTime' WHERE code='$pro_code'  ";
 
 $sqlData = "UPDATE product_purches SET sup_name='$sup_name', pur_dte='$pur_dte', purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$quantity', dte_modified='$dateTime' WHERE id='$id'  ";
 
@@ -49,12 +49,12 @@ if ($conn->query($sqlData) === TRUE) {
 	$_SESSION['actStatus'] = "success";
 	$_SESSION['actTitle'] = "Good job!";
 	$_SESSION['actMsg'] = "Purchase updated successfully!";
-	header("Location: ".$baseURL."addPurFrame.php");
+	header("Location: ".$baseURL."addPurCLens.php");
 } else {
 	$_SESSION['actStatus'] = "error";
 	$_SESSION['actTitle'] = "Oops!";
 	$_SESSION['actMsg'] = "Purchase not updated!";
-	header("Location: ".$baseURL."addPurFrame.php");
+	header("Location: ".$baseURL."addPurCLens.php");
 }
 
 

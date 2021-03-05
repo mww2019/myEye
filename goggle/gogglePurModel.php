@@ -135,6 +135,7 @@
                 <div class="modal-body">
                     <form method="post" action="./goggle/upPurGoggleData.php">
                         <input type="hidden" name="purID" id="purID">
+                        <input type="hidden" name="sENme" id="sENme">
                         <div class="col-sm-3">
                             <label for="code">Goggle Code</label>
                             <div class="form-group">
@@ -168,7 +169,7 @@
                             <label for="pro_code">Goggle Name</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="edit_f_name" name="f_name" class="form-control" readonly placeholder="Frame Name">
+                                    <input type="text" id="edit_f_name" name="f_name" class="form-control" readonly placeholder="Goggle Name">
                                 </div>
                             </div>
                         </div>

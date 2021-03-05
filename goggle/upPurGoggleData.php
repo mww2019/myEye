@@ -8,7 +8,7 @@ $dateTime	=	date('Y-m-d H:i:s');
 
 $id         = $_POST['purID'];
 $pro_code 	= $_POST['code'];
-$sup_name	= $_POST['sName'];
+$sup_name	= $_POST['sName']?$_POST['sName']:strtolower($_POST['sENme']);
 $pur_dte	= $_POST['pDte'];
 $quantity 	= $_POST['quantity'];
 $pur_price 	= $_POST['pur_price'];
