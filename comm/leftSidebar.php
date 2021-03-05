@@ -73,27 +73,27 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./addGoggle.php">
+                                <a href="./addPurGoggle.php">
                                     <span>Goggles</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./addCLens.php">
+                                <a href="./addPurCLens.php">
                                     <span>Contact Lenses</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./addGlass.php">
+                                <a href="./addPurGlass.php">
                                     <span>Glass</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./addSolution.php">
+                                <a href="./addPurSolution.php">
                                     <span>Solution</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="./addOtherProduct.php">
+                                <a href="./addPurOtherProduct.php">
                                     <span>Other Products</span>
                                 </a>
                             </li>

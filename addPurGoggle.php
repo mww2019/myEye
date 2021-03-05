@@ -3,7 +3,7 @@
     session_start();
 
     if($_SESSION['valid'] === true){
-        include_once('./frame/frameAutoData.php');
+        include_once('./goggle/goggleAutoData.php');
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
@@ -17,7 +17,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Add Frames Purchase | My Eye Care</title>
+    <title>Add Goggle Purchase | My Eye Care</title>
     <?php include('./comm/headerLinks.php') ?>
     <style type="text/css">
         .actionBtn{
@@ -42,8 +42,8 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                FRAME'S PURCHASE DATA 
-                                &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#framePurAddModal">
+                                GOGGLE'S PURCHASE DATA 
+                                &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#gogglePurAddModal">
                                         <i class="material-icons">add_box</i>
                                         <span>PURCHASE</span>
                                 </button>
@@ -51,11 +51,11 @@
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="framePurTable">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="gogglePurTable">
                                     <thead>
                                         <tr>
                                             <th>S.No.</th>
-                                            <th>Frame Code</th>
+                                            <th>Goggle Code</th>
                                             <th>Pro. Name</th>
                                             <th>Supp. Name</th>
                                             <th>Pur. Price(₹)</th>
@@ -75,7 +75,7 @@
         </div>
     </section>
 
-    <?php include('./frame/framePurModel.php'); ?>
+    <?php include('./goggle/gogglePurModel.php'); ?>
 
     <script src="./plugins/jquery/jquery.min.js"></script>
     <script src="./plugins/bootstrap/js/bootstrap.js"></script>
@@ -117,18 +117,18 @@
         $('#edit_pDte').datepicker();
 
         $(function () {
-            $('#framePurTable').DataTable({
+            $('#gogglePurTable').DataTable({
                 "responsive": true,
                 "processing": true,
                 "serverSide": true,
                 "bJQueryUI": true,
                 "ajax": {
-                    url: "./frame/fetchPurFrameData.php"
+                    url: "./goggle/fetchPurGoggleData.php"
                 },
                 error: function () { 
                     $(".example -error").html("");
-                    $("#framePurTable").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-                    $("#framePurTable").css("display", "none");
+                    $("#gogglePurTable").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                    $("#gogglePurTable").css("display", "none");
                 },
                 "destroy": true
             });
@@ -165,14 +165,14 @@
              }
 
         $(document).on('change', '#code', function(e) {
-            var frameCode = $("#code").val();
+            var goggleCode = $("#code").val();
 
             $.ajax({
-                    url: "./frame/frameName.php",
+                    url: "./goggle/goggleName.php",
                     type: "POST",
                     cache: false,
                     data:{
-                        id: frameCode
+                        id: goggleCode
                     },
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
@@ -190,7 +190,7 @@
             var purID = $("#purID").val();
 
             $.ajax({
-                    url: "./frame/framePurValue.php",
+                    url: "./goggle/gogglePurValue.php",
                     type: "POST",
                     cache: false,
                     data:{

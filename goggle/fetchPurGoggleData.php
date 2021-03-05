@@ -15,12 +15,12 @@ $columns = array(
         8 => 'tax'
     );
 
-    $sql = "SELECT * FROM product_purches WHERE status=1 and pro_cat='frame'";
+    $sql = "SELECT * FROM product_purches WHERE status=1 and pro_cat='goggle'";
     $query = mysqli_query($conn, $sql) or die("Mysql Mysql Error in getting : get products");
     $totalData = mysqli_num_rows($query);
     $totalFiltered = $totalData;  
 
-    $sql = "SELECT * FROM product_purches WHERE status=1 and pro_cat='frame'";
+    $sql = "SELECT * FROM product_purches WHERE status=1 and pro_cat='goggle'";
     if (!empty($requestData['search']['value'])) {  
         $sql .= " AND ( pro_code LIKE '" . $requestData['search']['value'] . "%' ";
         $sql .= " OR pro_name LIKE '" . $requestData['search']['value'] . "%' )";
@@ -45,7 +45,7 @@ $columns = array(
         $nestedData[] = $row["tax"];
         $nestedData[] = $row["quantity"];
         $nestedData[] = date('M, d Y', strtotime($row["pur_dte"]));
-        $nestedData[] = '<button type="button" data-toggle="modal" data-target="#framePurUpModal" data-vendor='. $row['id'] .' class="btn btn-primary waves-effect actionBtn upModelBtn" title="Edit"><i class="material-icons">edit</i></button>';
+        $nestedData[] = '<button type="button" data-toggle="modal" data-target="#gogglePurUpModal" data-vendor='. $row['id'] .' class="btn btn-primary waves-effect actionBtn upModelBtn" title="Edit"><i class="material-icons">edit</i></button>';
         // $nestedData[] = '<button type="button" data-toggle="modal" data-target="#framePurUpModal" data-vendor='. $row['id'] .' class="btn btn-primary waves-effect actionBtn upModelBtn" title="Edit"><i class="material-icons">edit</i></button>&nbsp;&nbsp;<button onclick="delPurFrame('. $row['id'] .')" type="button" class="btn btn-danger waves-effect actionBtn" title="Delete"><i class="material-icons">delete</i></button>';
 
         $data[] = $nestedData;
