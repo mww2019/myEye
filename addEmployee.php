@@ -1,21 +1,14 @@
 <?php 
     error_reporting(0);
     session_start();
-    // $uID    = $_GET['id'];
-    // $uType  = $_GET['upType'];
 
     if($_SESSION['valid'] === true){
         include_once('./comm/baseURL.php');
-        include_once('./emp/autoDta.php');
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
-
-        // if($uID != '' && $uType == 'emp'){
-        //     include_once('./comm/db.php');
-        //     $empF = "SELECT * FROM user where id='$uID' "; 
-        //     $empFResult = $conn->query($empF)->fetch_array();
-        // } 
+        $branch     = $_SESSION['branch'];
+        include_once('./emp/autoDta.php');
 
 ?>
 
@@ -36,197 +29,16 @@
 </head>
 
 <body class="theme-red">
-    <!-- Page Loader -->
     <?php include_once('./comm/loader.php') ?>
-    <!-- #END# Page Loader -->
-    <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
-    <!-- #END# Overlay For Sidebars -->
-    <!-- Top Bar -->
     <?php include_once('./comm/topBar.php') ?>
-    <!-- #Top Bar -->
     <section>
-        <!-- Left Sidebar -->
         <?php include_once('./comm/leftSidebar.php') ?>
-        <!-- #END# Left Sidebar -->
-        <!-- Right Sidebar -->
         <?php include_once('./comm/rightSidebar.php') ?>
-        <!-- #END# Right Sidebar -->
     </section>
 
     <section class="content">
         <div class="container-fluid">
-            <!-- Input -->
-            <!-- <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-                    <?php if($uID == ''){ ?>
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                ADD EMPLOYEE
-                                <small>Please enter employee details <span id="message"></span></small>
-                            </h2>
-                        </div>
-                        <div class="body">
-                            <form method="post" action="./emp/addEmpData.php">
-                                <div class="col-sm-4">
-                                    <label for="eName">Name</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" id="eName" name="eName" class="form-control" placeholder="Enter employee name" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="email">Email</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter employee email" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="phone">Phone</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter employee phone number" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="password">Password</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="rPass">Re-enter Password</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="password" id="rPass" name="rPass" class="form-control" placeholder="Enter re-enter password" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="asgShop">Assign Shop</label>
-                                    <div class="">
-                                        <div class="form-line">
-                                            <select class="form-control show-tick" name="asgShop" id="asgShop" required>
-                                                <option value="">-- Please select --</option>
-                                                <?php $i=0; foreach ($shopFetchResult as $dta) { ?>
-                                                    <option value="<?= $shopFetchResult[$i]['id'] ?>"><?= ucwords($shopFetchResult[$i]['name']) ?></option>
-                                                <?php $i++; } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5">
-                                    <label for="empType">Emp Type</label>
-                                    <div class="">
-                                        <div class="form-line">
-                                            <select class="form-control show-tick" name="empType" id="empType" required>
-                                                <option value="">-- Please select --</option>
-                                                <option value="employee">Employee</option>
-                                                <option value="admin">Admin</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <label for="address">Address</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <textarea rows="4" name="address" class="form-control no-resize" placeholder="Enter shop address..." required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <input type="submit" id="save" class="btn btn-primary m-t-15 waves-effect" value="SUBMIT" />
-                            </form>
-                        </div>
-                    </div>
-                    <?php } else { ?>
-                        <div class="card">
-                        <div class="header">
-                            <h2>
-                                UPDATE EMPLOYEE
-                                <small>Please update employee details</small>
-                            </h2>
-                        </div>
-                        <div class="body">
-                            <form method="post" action="./emp/upEmpData.php">
-                                <input type="hidden" name="empId" value="<?= $uID ?>">
-                                <div class="col-sm-4">
-                                    <label for="eName">Name</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" id="eName" name="eName" value="<?= ucwords($empFResult['name']) ?>" class="form-control" placeholder="Enter employee name" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="email">Email</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="email" id="email" name="email" value="<?= $empFResult['email'] ?>" class="form-control" placeholder="Enter employee email" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="phone">Phone</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" id="phone" name="phone" value="<?= $empFResult['phone'] ?>" class="form-control" placeholder="Enter employee phone number" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="asgShop">Assign Shop</label>
-                                    <div class="">
-                                        <div class="form-line">
-                                            <select class="form-control show-tick" name="asgShop" id="asgShop" required>
-                                                <option value="">-- Please select --</option>
-                                                <?php $i=0; foreach ($shopFetchResult as $dta) { ?>
-                                                    <option value="<?= $shopFetchResult[$i]['id'] ?>" <?php echo ($empFResult['assign_shop'] == $shopFetchResult[$i]['id']) ? 'selected' : '' ?> ><?= ucwords($shopFetchResult[$i]['name']) ?></option>
-                                                <?php $i++; } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="empType">Emp Type</label>
-                                    <div class="">
-                                        <div class="form-line">
-                                            <select class="form-control show-tick" name="empType" id="empType" required>
-                                                <option value="">-- Please select --</option>
-                                                <option value="employee" <?php echo ($empFResult['emp_type'] == 'employee') ? 'selected' : '' ?>>Employee</option>
-                                                <option value="admin" <?php echo ($empFResult['emp_type'] == 'admin') ? 'selected' : '' ?>>Admin</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="address">Address</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <textarea rows="4" name="address" class="form-control no-resize" placeholder="Enter shop address..." required><?= ucwords($empFResult['address']) ?></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <input type="submit" id="save" class="btn btn-primary m-t-15 waves-effect" value="UPDATE" />
-                            </form>
-                        </div>
-                    </div>
-                    <?php } ?>
-
-                </div>
-            </div> -->
-            <!-- #END# Input -->
-            <!-- Basic Examples -->
             <div class="row clearfix" >
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -266,7 +78,136 @@
 
     <?php include_once('./emp/empModel.php') ?>
 
-    <?php include_once('./emp/empCustom.js') ?>
+    <script src="./plugins/jquery/jquery.min.js"></script>
+    <script src="./plugins/bootstrap/js/bootstrap.js"></script>
+    <!-- <script src="./plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+    <script src="./plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="./plugins/node-waves/waves.js"></script>
+    <script src="./plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="./plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="./plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="./plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="./plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="./plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="./plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="./plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="./plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="./js/admin.js"></script>
+    <script src="./js/pages/tables/jquery-datatable.js"></script>
+    <script src="./js/demo.js"></script>
+
+    <script type="text/javascript">
+        $("#empType").change(function() {
+            var val = $("#empType").val();
+            if(val == 'admin'){
+                $('#asgShop').val(null);
+                $('#asgShop').attr("disabled", "disabled");
+                $('#empType').attr("required", null);
+            }else{
+                $('#asgShop').attr("disabled", null);
+                $('#empType').attr("required", "required");
+            }
+        });
+
+        $("#empType_edit").change(function() {
+            var val = $("#empType_edit").val();
+            if(val == 'admin'){
+                $('#asgShop_edit').val(null);
+                $('#asgShop_edit').attr("disabled", "disabled");
+                $('#empType_edit').attr("required", null);
+            }else{
+                $('#asgShop_edit').attr("disabled", null);
+                $('#empType_edit').attr("required", "required");
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#empTable').DataTable({
+                "responsive": true,
+                "processing": true,
+                "serverSide": true,
+                "bJQueryUI": true,
+                "ajax": {
+                    url: "./emp/fetchEmpData.php"
+                },
+                error: function () { 
+                    $(".example -error").html("");
+                    $("#empTable").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                    $("#example_processing").css("display", "none");
+                },
+                "destroy": true
+            });
+        });
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        function delEmployee(id){
+            swal({
+              title: "Are you sure?",
+              text: "want to delete employee details!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                window.location.href = "<?= $baseURL ?>emp/delEmployee.php?id="+id;
+              } else {
+                swal("Employee details are not going to delete!");
+              }
+            });
+        }
+
+        // function editEmployee(id){
+        //     window.location.href = "<?= $baseURL ?>addEmployee.php?upType=emp&id="+id;
+        // }
+
+        function toUpper(str) {
+            return str
+                .toLowerCase()
+                .split(' ')
+                .map(function(word) {
+                    return word[0].toUpperCase() + word.substr(1);
+                })
+                .join(' ');
+        }
+
+        $(document).on('click', '.upModelBtn', function(e) {
+            $("#empId").val($(this).attr('data-vendor'));
+            var empID = $("#empId").val();
+
+            $.ajax({
+                    url: "./emp/empValue.php",
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        id: empID
+                    },
+                    success: function(dataResult){
+                        var dataResult = JSON.parse(dataResult);
+                        document.getElementById('eName_edit').value     = toUpper(dataResult['name']);
+                        document.getElementById('email_edit').value     = dataResult['email'];
+                        document.getElementById('phone_edit').value     = dataResult['phone'];
+                        document.getElementById('asgShop_edit').value   = dataResult['asgShop'];
+                        document.getElementById('empType_edit').value   = dataResult['empType'];
+                        // $('#empType_edit option:selected').attr("selected",null);
+                        // $('#empType_edit option[value="employee"]').attr("selected", "selected");
+                        // $('#empType_edit').val(employee).attr("selected", "selected");
+                        // $('#empType_edit').val(dataResult.empType);
+                        if(dataResult['empType'] == 'admin'){
+                            $('#asgShop_edit').attr("disabled", "disabled");
+                        }
+                        else{
+                            $('#asgShop_edit').attr("disabled", null);
+                        }
+                        document.getElementById('address_edit').value   = toUpper(dataResult['address']);
+                    }
+                });
+        });
+    </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php if(isset($_SESSION['actStatus'])){ ?>

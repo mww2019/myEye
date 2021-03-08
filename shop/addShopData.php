@@ -6,12 +6,13 @@ session_start();
 
 $name 		= strtolower($_POST['shop_name']);
 $phone 		= $_POST['phone'];
+$branch 	= $_POST['branch'];
 $address 	= strtolower($_POST['address']);
 
 
 include_once '../comm/db.php'; 
 
-$sqlData = "INSERT INTO shop (name, phone, address) VALUES ('$name', '$phone', '$address')";
+$sqlData = "INSERT INTO shop (name, phone, branch, address) VALUES ('$name', '$phone', '$branch', '$address')";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$_SESSION['actStatus'] = "success";

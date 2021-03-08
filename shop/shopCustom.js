@@ -3,7 +3,7 @@
     <!-- Bootstrap Core Js -->
     <script src="./plugins/bootstrap/js/bootstrap.js"></script>
     <!-- Select Plugin Js -->
-    <script src="./plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    // <script src="./plugins/bootstrap-select/js/bootstrap-select.js"></script>
     <!-- Slimscroll Plugin Js -->
     <script src="./plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
     <!-- Waves Effect Plugin Js -->
@@ -92,6 +92,7 @@
                         var dataResult = JSON.parse(dataResult);
                         document.getElementById('shop_name_edit').value = toUpper(dataResult['name']);
                         document.getElementById('phone_edit').value = dataResult['phone'];
+                        document.getElementById('branch_edit').value = dataResult['branch'];
                         document.getElementById('address_edit').value = toUpper(dataResult['address']);
                     }
                 });

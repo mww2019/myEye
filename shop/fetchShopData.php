@@ -1,6 +1,9 @@
 <?php
 
+session_start();
 include '../comm/db.php';
+
+$branch = $_SESSION['branch'];
 
 $requestData = $_REQUEST;
 $columns = array(
@@ -9,12 +12,12 @@ $columns = array(
         2 => 'phone'
     );
 
-    $sql = "SELECT * FROM shop WHERE status=1";
+    $sql = "SELECT * FROM shop WHERE branch='$branch' and status=1";
     $query = mysqli_query($conn, $sql) or die("Mysql Mysql Error in getting : get products");
     $totalData = mysqli_num_rows($query);
     $totalFiltered = $totalData;  
 
-    $sql = "SELECT * FROM shop WHERE status=1";
+    $sql = "SELECT * FROM shop WHERE branch='$branch' and status=1";
     if (!empty($requestData['search']['value'])) {  
         $sql .= " AND ( name LIKE '" . $requestData['search']['value'] . "%' ";
         $sql .= " OR phone LIKE '" . $requestData['search']['value'] . "%' ";

@@ -46,7 +46,6 @@
                                 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#customerAddModal">
                                         <i class="material-icons">add_box</i>
                                         <span>CUSTOMER</span>
-                                </button>
                             </h2>
                         </div>
                         <div class="body">
@@ -106,6 +105,20 @@
     
 
     <script type="text/javascript">
+        // $(function () {
+        //     console.log("hello");
+        //     setInterval(timestamp, 1000);
+        // });
+
+        // function timestamp() {
+        //     $.ajax({
+        //         url: './comm/timestamp.php',
+        //         success: function(data) {
+        //             $('#timestamp').html(data);
+        //         },
+        //     });
+        // }
+
         $( function() {
             $( "#edit_dob" ).datepicker();
         });

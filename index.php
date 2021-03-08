@@ -5,7 +5,9 @@
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
+        $branch     = $_SESSION['branch'];
         include('./dashboard/autoFetch.php');
+        include('./comm/baseURL.php');
 
 ?>
 
@@ -379,7 +381,24 @@
     <script src="./plugins/jquery-sparkline/jquery.sparkline.js"></script>
     <!-- Custom Js -->
     <script src="./js/admin.js"></script>
-    <script src="./js/pages/index.js"></script>
+    <!-- <script src="./js/pages/index.js"></script> -->
+    <script src="./js/demo.js"></script>
+
+    <!-- <script type="text/javascript">
+        $(function () {
+            console.log("hello");
+            setInterval(timestamp, 1000);
+        });
+
+        function timestamp() {
+            $.ajax({
+                url: './comm/timestamp.php',
+                success: function(data) {
+                    $('#timestamp').html(data);
+                },
+            });
+        }
+    </script> -->
 
     
 </body>

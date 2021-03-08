@@ -8,7 +8,7 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./shop/addShopData.php">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="shop_name">Shop Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -16,11 +16,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="phone">Phone</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter shop phone number" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="branch">Branch</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" name="branch" id="branch" required>
+                                        <option>--- Select One ---</option>
+                                        <option value="a">A</option>
+                                        <option value="b">B</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +64,7 @@
                 <div class="modal-body">
                     <form method="post" action="./shop/upShopData.php">
                         <input type="hidden" name="shopId" id="shopId">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="shop_name">Shop Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -60,11 +72,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <label for="phone">Phone</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="phone_edit" name="phone" class="form-control" placeholder="Enter shop phone number" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="branch">Emp Type</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" name="branch" id="branch_edit" required>
+                                        <option>--- Select One ---</option>
+                                        <option value="a">A</option>
+                                        <option value="b">B</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

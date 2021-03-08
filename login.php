@@ -23,8 +23,10 @@
             $_SESSION['username']   = $row['email'];
             $_SESSION['uName']      = $row['name'];
             $_SESSION['empType']    = $row['emp_type'];
+            $_SESSION['branch']     = $row['branch'];
             $_SESSION['valid']      = true;
             $_SESSION['timeout']    = time();
+            include './comm/loginL.php';
             header("Location: ".$baseURL);
         }
         else
@@ -60,7 +62,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="username" placeholder="Email or Phone No." required autofocus>
+                            <input type="text" class="form-control" name="username" placeholder="Email or Phone No." required autocomplete="off">
                         </div>
                     </div>
                     <div class="input-group">
@@ -68,7 +70,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">

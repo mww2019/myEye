@@ -4,12 +4,14 @@
 include_once '../comm/baseURL.php';
 include_once '../comm/db.php';
 session_start();
+$branchh    = $_SESSION['branch'];
 
 $name 		= strtolower($_POST['eName']);
 $email		= strtolower($_POST['email']);
 $phone 		= $_POST['phone'];
 $pass		= $_POST['password'];
 $rPass		= $_POST['rPass'];
+$branch		= $branchh;
 $assignShop = $_POST['asgShop']?$_POST['asgShop']:'NULL';
 $empType	= $_POST['empType'];
 $address 	= $_POST['address'];
@@ -40,7 +42,7 @@ else if($pass !== $rPass){
 }
 else{
 	$pass = md5($_POST['password']);
-	$sqlData = "INSERT INTO user (name, email, phone, password, emp_type, address, assign_shop) VALUES ('$name', '$email', '$phone', '$pass', '$empType', '$address', '$assignShop')";
+	$sqlData = "INSERT INTO user (name, email, phone, password, emp_type, address, branch, assign_shop) VALUES ('$name', '$email', '$phone', '$pass', '$empType', '$address', '$branch', '$assignShop')";
 
 	if ($conn->query($sqlData) === TRUE) { 
 		$_SESSION['actStatus'] = "success";

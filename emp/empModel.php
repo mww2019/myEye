@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="empType">Emp Type</label>
-                                    <div class="">
+                                    <div class="form-group">
                                         <div class="form-line">
                                             <select class="form-control show-tick" name="empType" id="empType">
                                                 <option value="employee">Employee</option>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col-sm-5">
                                     <label for="asgShop">Assign Shop</label>
-                                    <div class="">
+                                    <div class="form-group">
                                         <div class="form-line">
                                             <select class="form-control show-tick" name="asgShop" id="asgShop" required>
                                                 <option value="">---- Select One ----</option>

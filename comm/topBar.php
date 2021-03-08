@@ -3,7 +3,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.php" style="font-size: x-large;">DashBoard - My Eye Care</a>
+                <a class="navbar-brand" href="index.php" style="font-size: x-large;">DashBoard - My Eye Care [ <?= ucwords($branch) ?> ]</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -12,7 +12,7 @@
                             <?php echo date('l - M, d Y'); ?>
                             <!-- <i class="material-icons">notifications</i>
                             <span class="label-count">7</span> -->
-                        </a>
+                        <div id="timestamp"></div></a> 
                     </li>
                     <!-- Call Search -->
                     <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li> -->
