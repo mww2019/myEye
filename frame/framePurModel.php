@@ -8,6 +8,21 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./frame/addPurFrameData.php">
+                        <?php if($branch === ''){ ?>
+                        <div class="col-sm-12">
+                            <label for="branch">Branch</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" name="branch" id="branch" required>
+                                        <option value="">---- Select One ----</option>
+                                        <?php $i=0; foreach ($branchFetchResult as $dta) { ?>
+                                            <option value="<?= $branchFetchResult[$i]['branch_name'] ?>"><?= ucwords($branchFetchResult[$i]['branch_name']) ?></option>
+                                        <?php $i++; } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <div class="col-sm-3">
                             <label for="code">Frame Code</label>
                             <div class="form-group">
@@ -134,6 +149,23 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./frame/upPurFrameData.php">
+                        <?php if($branch === ''){ ?>
+                        <!-- <input type="hidden" name="branchNme" id="branchNme">   -->
+                        <div class="col-sm-12">
+                            <label for="branch">Branch</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="edit_branch" name="branch" class="form-control" readonly>
+                                    <!-- <select class="form-control show-tick" name="branch" id="edit_branch" required>
+                                        <option value="">---- Select One ----</option>
+                                        <?php $i=0; foreach ($branchFetchResult as $dta) { ?>
+                                            <option value="<?= $branchFetchResult[$i]['branch_name'] ?>"><?= ucwords($branchFetchResult[$i]['branch_name']) ?></option>
+                                        <?php $i++; } ?>
+                                    </select> -->
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <input type="hidden" name="purID" id="purID">
                         <input type="hidden" name="sENme" id="sENme">
                         <div class="col-sm-3">

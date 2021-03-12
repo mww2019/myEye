@@ -1,17 +1,18 @@
 <?php
 
-// error_reporting(0);
+error_reporting(0);
 include_once '../comm/baseURL.php';
 include_once '../comm/db.php';
 session_start();
-$branchh    = $_SESSION['branch'];
+$branchh    = $_SESSION['branch']?$_SESSION['branch']:$_POST['asgSBranch'];
+$branchh1	= $branchh?$branchh:'NULL';
 
 $name 		= strtolower($_POST['eName']);
 $email		= strtolower($_POST['email']);
 $phone 		= $_POST['phone'];
 $pass		= $_POST['password'];
 $rPass		= $_POST['rPass'];
-$branch		= $branchh;
+$branch		= $branchh1;
 $assignShop = $_POST['asgShop']?$_POST['asgShop']:'NULL';
 $empType	= $_POST['empType'];
 $address 	= $_POST['address'];

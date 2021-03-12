@@ -7,7 +7,8 @@
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
-
+        $branch     = $_SESSION['branch'];
+        include_once('./comm/branchFetch.php');
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +62,9 @@
                                     <thead>
                                         <tr>
                                             <th>S.No.</th>
+                                            <?php if($branch === ''){ ?>
+                                                <th>Branch</th>
+                                            <?php } ?>
                                             <th>Frame Code</th>
                                             <th>Pro. Name</th>
                                             <th>Supp. Name</th>
@@ -178,13 +182,36 @@
 
         $(document).on('change', '#code', function(e) {
             var frameCode = $("#code").val();
-
+            var branch = $("#branch").val();
             $.ajax({
                     url: "./frame/frameName.php",
                     type: "POST",
                     cache: false,
                     data:{
-                        id: frameCode
+                        id: frameCode,
+                        branch: branch
+                    },
+                    success: function(dataResult){
+                        var dataResult = JSON.parse(dataResult);
+                        document.getElementById('f_name').value         = toUpper(dataResult['name']);
+                        document.getElementById('pre_pur_price').value  = dataResult['p_price'];
+                        document.getElementById('pre_sell_price').value = dataResult['s_price'];
+                        document.getElementById('pre_tax').value        = dataResult['tax'];
+                        document.getElementById('re_quantity').value    = dataResult['quantity'];
+                    }
+                });
+        });
+
+        $(document).on('change', '#branch', function(e) {
+            var frameCode = $("#code").val();
+            var branch = $("#branch").val();
+            $.ajax({
+                    url: "./frame/frameName.php",
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        id: frameCode,
+                        branch: branch
                     },
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
@@ -210,6 +237,8 @@
                     },
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
+                        // document.getElementById('edit_branch-selectized').value  = toUpper(dataResult['branch']);
+                        document.getElementById('edit_branch').value  = toUpper(dataResult['branch']);
                         document.getElementById('edit_code').value  = dataResult['pro_code'];
                         document.getElementById('edit_sName-selectized').value = toUpper(dataResult['sup_name']);
                         document.getElementById('edit_pDte').value = dataResult['pur_dte'];
@@ -219,6 +248,7 @@
                         document.getElementById('edit_quantity').value = dataResult['quantity'];
                         document.getElementById('edit_tax').value = dataResult['tax'];
 
+                        // document.getElementById('branchNme').value = document.getElementById('edit_branch-selectized').value;
                         document.getElementById('sENme').value = document.getElementById('edit_sName-selectized').value;
                     }
                 });

@@ -20,14 +20,33 @@
         $row = $result -> fetch_array(MYSQLI_ASSOC);
         if(mysqli_num_rows($result) > 0)
         {
-            $_SESSION['username']   = $row['email'];
-            $_SESSION['uName']      = $row['name'];
-            $_SESSION['empType']    = $row['emp_type'];
-            $_SESSION['branch']     = $row['branch'];
-            $_SESSION['valid']      = true;
-            $_SESSION['timeout']    = time();
-            include './comm/loginL.php';
-            header("Location: ".$baseURL);
+            if($row['emp_type'] !== 'superadmin'){
+                $branch = $row['branch'];
+                $sql1 = "SELECT * FROM branch WHERE branch_name='$branch' and status=1"; 
+                $result1 = $conn->query($sql1);
+                $row1 = $result1 -> fetch_array(MYSQLI_ASSOC);
+                if(mysqli_num_rows($result1) > 0) {
+                    $_SESSION['username']   = $row['email'];
+                    $_SESSION['uName']      = $row['name'];
+                    $_SESSION['empType']    = $row['emp_type'];
+                    $_SESSION['branch']     = $row['branch'];
+                    $_SESSION['valid']      = true;
+                    $_SESSION['timeout']    = time();
+                    include './comm/loginL.php';
+                    header("Location: ".$baseURL);
+                } else {
+                    $msg = 'User not exist!';
+                }
+            } else{
+                $_SESSION['username']   = $row['email'];
+                $_SESSION['uName']      = $row['name'];
+                $_SESSION['empType']    = $row['emp_type'];
+                $_SESSION['branch']     = $row['branch'];
+                $_SESSION['valid']      = true;
+                $_SESSION['timeout']    = time();
+                include './comm/loginL.php';
+                header("Location: ".$baseURL);
+            }  
         }
         else
         {

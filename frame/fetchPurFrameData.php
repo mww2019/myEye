@@ -1,6 +1,8 @@
 <?php
 
 include '../comm/db.php';
+session_start();
+$branch     = $_SESSION['branch'];
 
 $requestData = $_REQUEST;
 $columns = array(
@@ -15,12 +17,18 @@ $columns = array(
         8 => 'tax'
     );
 
-    $sql = "SELECT * FROM product_purches WHERE status=1 and pro_cat='frame'";
+    if($branch === '') {
+        $sqlQuery = "SELECT * FROM product_purches WHERE status=1 and pro_cat='frame'";
+    } else {
+        $sqlQuery = "SELECT * FROM product_purches WHERE status=1 and branch='$branch' and pro_cat='frame'";
+    }
+
+    $sql = $sqlQuery;
     $query = mysqli_query($conn, $sql) or die("Mysql Mysql Error in getting : get products");
     $totalData = mysqli_num_rows($query);
     $totalFiltered = $totalData;  
 
-    $sql = "SELECT * FROM product_purches WHERE status=1 and pro_cat='frame'";
+    $sql = $sqlQuery;
     if (!empty($requestData['search']['value'])) {  
         $sql .= " AND ( pro_code LIKE '" . $requestData['search']['value'] . "%' ";
         $sql .= " OR pro_name LIKE '" . $requestData['search']['value'] . "%' )";
@@ -37,6 +45,9 @@ $columns = array(
     while ($row = mysqli_fetch_array($query)) {  
         $nestedData = array();
         $nestedData[] = $no;
+        if($branch === ''){
+            $nestedData[] = ucwords($row["branch"]);
+        }
         $nestedData[] = $row["pro_code"];
         $nestedData[] = ucwords($row["pro_name"]);
         $nestedData[] = ucwords($row["sup_name"]);

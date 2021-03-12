@@ -9,6 +9,7 @@
         $empMail    = $_SESSION['username'];
         $branch     = $_SESSION['branch'];
         include_once('./emp/autoDta.php');
+        include_once('./comm/branchFetch.php');
 
 ?>
 
@@ -60,6 +61,9 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone No.</th>
+                                            <?php if($branch === ''){ ?>
+                                                <th>Branch</th>
+                                            <?php } ?>
                                             <th>Assign Shop</th>
                                             <th>Emp Type</th>
                                             <th>Address</th>
@@ -103,9 +107,17 @@
                 $('#asgShop').val(null);
                 $('#asgShop').attr("disabled", "disabled");
                 $('#empType').attr("required", null);
-            }else{
+                $('#asgBranch').attr("disabled", null);
+            } else if(val == 'superadmin'){
+                $('#asgShop').val(null);
+                $('#asgShop').attr("disabled", "disabled");
+                $('#empType').attr("required", null);
+                $('#asgBranch').val(null);
+                $('#asgBranch').attr("disabled", "disabled");
+            } else{
                 $('#asgShop').attr("disabled", null);
                 $('#empType').attr("required", "required");
+                $('#asgBranch').attr("disabled", null);
             }
         });
 
@@ -115,9 +127,17 @@
                 $('#asgShop_edit').val(null);
                 $('#asgShop_edit').attr("disabled", "disabled");
                 $('#empType_edit').attr("required", null);
-            }else{
+                $('#asgBranch_edit').attr("disabled", null);
+            } else if(val == 'superadmin'){
+                $('#asgShop_edit').val(null);
+                $('#asgShop_edit').attr("disabled", "disabled");
+                $('#empType_edit').attr("required", null);
+                $('#asgBranch_edit').val(null);
+                $('#asgBranch_edit').attr("disabled", "disabled");
+            } else{
                 $('#asgShop_edit').attr("disabled", null);
                 $('#empType_edit').attr("required", "required");
+                $('#asgBranch_edit').attr("disabled", null);
             }
         });
     </script>
@@ -188,6 +208,7 @@
                     },
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
+                        document.getElementById('asgBranch_edit').value = dataResult['branch'];
                         document.getElementById('eName_edit').value     = toUpper(dataResult['name']);
                         document.getElementById('email_edit').value     = dataResult['email'];
                         document.getElementById('phone_edit').value     = dataResult['phone'];
@@ -198,10 +219,20 @@
                         // $('#empType_edit').val(employee).attr("selected", "selected");
                         // $('#empType_edit').val(dataResult.empType);
                         if(dataResult['empType'] == 'admin'){
+                            $('#asgBranch_edit').attr("disabled", null);
                             $('#asgShop_edit').attr("disabled", "disabled");
-                        }
-                        else{
+                            $('#asgShop_edit').val(null);
+                            // $('#empType_edit').attr("disabled", null);
+                        } else if(dataResult['empType'] == 'superadmin'){
+                            $('#asgBranch_edit').attr("disabled", "disabled");
+                            $('#asgShop_edit').attr("disabled", "disabled");
+                            $('#asgBranch_edit').val(null);
+                            $('#asgShop_edit').val(null);
+                            // $('#empType_edit').attr("disabled", null);
+                        }else{
+                            $('#asgBranch_edit').attr("disabled", null);
                             $('#asgShop_edit').attr("disabled", null);
+                            // $('#empType_edit').attr("disabled", null);
                         }
                         document.getElementById('address_edit').value   = toUpper(dataResult['address']);
                     }

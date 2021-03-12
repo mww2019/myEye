@@ -19,23 +19,30 @@ $pur_price 	= $_POST['pur_price']?$_POST['pur_price']:0;
 $sell_price = $_POST['sell_price']?$_POST['sell_price']:0;
 $tax 		= $_POST['tax']?$_POST['tax']:0;
 
-
 include_once '../comm/db.php'; 
 
-$sqlData = "INSERT INTO product_frame (code, name, company, quality, color, size, type, gender, shape, material, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$frame_name', '$company', '$quality', '$color', '$size', '$type', '$gender', '$shape', '$material', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
-
-if ($conn->query($sqlData) === TRUE) { 
-	$_SESSION['actStatus'] = "success";
-	$_SESSION['actTitle'] = "Good job!";
-	$_SESSION['actMsg'] = "Frame added successfully!";
-	header("Location: ".$baseURL."addFrame.php");
-} else {
+$chkCode = "SELECT * FROM product_frame WHERE code='$pro_code' ";
+$resultChkCode = $conn->query($chkCode)->fetch_array();
+if($resultChkCode['code'] === $pro_code) {
 	$_SESSION['actStatus'] = "error";
 	$_SESSION['actTitle'] = "Oops!";
-	$_SESSION['actMsg'] = "Frame not added!";
+	$_SESSION['actMsg'] = "Frame code already exist!";
 	header("Location: ".$baseURL."addFrame.php");
-}
+} else {
+	$sqlData = "INSERT INTO product_frame (code, name, company, quality, color, size, type, gender, shape, material, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$frame_name', '$company', '$quality', '$color', '$size', '$type', '$gender', '$shape', '$material', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
 
+	if ($conn->query($sqlData) === TRUE) { 
+		$_SESSION['actStatus'] = "success";
+		$_SESSION['actTitle'] = "Good job!";
+		$_SESSION['actMsg'] = "Frame added successfully!";
+		header("Location: ".$baseURL."addFrame.php");
+	} else {
+		$_SESSION['actStatus'] = "error";
+		$_SESSION['actTitle'] = "Oops!";
+		$_SESSION['actMsg'] = "Frame not added!";
+		header("Location: ".$baseURL."addFrame.php");
+	}
+}
 
 
 

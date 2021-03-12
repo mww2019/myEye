@@ -1,10 +1,11 @@
 <?php
 
-// error_reporting(0);
+//error_reporting(0);
 include_once '../comm/baseURL.php';
 session_start();
 date_default_timezone_set('Asia/Kolkata');
 $dateTime	=	date('Y-m-d H:i:s');
+$branch 	= $_SESSION['branch']?$_SESSION['branch']:$_POST['branch'];
 
 $pro_cat 	= 'frame';
 $pro_code 	= $_POST['code']?$_POST['code']:'NA';
@@ -18,14 +19,31 @@ $quantity 	= $_POST['quantity']?$_POST['quantity']:0;
 
 include_once '../comm/db.php'; 
 
-$qtyFetch = "SELECT quantity FROM product_frame WHERE code='$pro_code'"; 
-$qtyFetchResult = $conn->query($qtyFetch)->fetch_all(MYSQLI_ASSOC);
-$pre_quant = $qtyFetchResult[0]['quantity'];
-$new_quantity = $quantity + $pre_quant;
+$chkPro = "SELECT * FROM $branch WHERE product_code='$pro_code' ";
+$chkProResult = $conn->query($chkPro)->fetch_array();
 
-$sqlData1 = "UPDATE product_frame SET purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$new_quantity', dte_modified='$dateTime' WHERE code='$pro_code'  ";
+// echo $pro_code;
+// echo "<pre>";
+// print_r($chkProResult);
+// echo $chkProResult['product_code'];
+// echo "</pre>";
 
-$sqlData = "INSERT INTO product_purches (pro_cat, pro_code, pro_name, sup_name, pur_dte, purchase_price, selling_price, tax, quantity) VALUES ('$pro_cat', '$pro_code', '$pro_name', '$sup_name', '$pur_dte', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
+if($chkProResult['product_code'] === $pro_code) { 
+
+	// $qtyFetch = "SELECT quantity FROM $branch WHERE product_code='$pro_code'"; 
+	// $qtyFetchResult = $conn->query($qtyFetch)->fetch_all(MYSQLI_ASSOC);
+	$pre_quant = $chkProResult['quantity'];
+	$new_quantity = $quantity + $pre_quant;
+
+	$sqlData1 = "UPDATE $branch SET purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$new_quantity', dte_modified='$dateTime' WHERE product_code='$pro_code'  ";
+}
+else{
+
+	$sqlData1 = "INSERT INTO $branch (branch_name, product_cat, product_code, product_name, purchase_price, selling_price, tax, quantity) VALUES ('$branch', '$pro_cat', '$pro_code', '$pro_name', '$pur_price' ,'$sell_price', '$tax', '$quantity') ";
+}
+
+
+$sqlData = "INSERT INTO product_purches (branch, pro_cat, pro_code, pro_name, sup_name, pur_dte, purchase_price, selling_price, tax, quantity) VALUES ('$branch', '$pro_cat', '$pro_code', '$pro_name', '$sup_name', '$pur_dte', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$conn->query($sqlData1);
@@ -44,3 +62,8 @@ if ($conn->query($sqlData) === TRUE) {
 
 
 ?>
+
+
+
+
+

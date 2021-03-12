@@ -5,12 +5,15 @@ include_once '../comm/baseURL.php';
 include_once '../comm/db.php';
 session_start();
 date_default_timezone_set('Asia/Kolkata');
-$dateTime	=	date('Y-m-d H:i:s');
+$dateTime	= date('Y-m-d H:i:s');
+$branchh    = $_SESSION['branch']?$_SESSION['branch']:$_POST['asgSBranch'];
+$branchh1	= $branchh?$branchh:'NULL';
 
 $id 		= $_POST['empId'];
 $name 		= strtolower($_POST['eName']);
 $email		= strtolower($_POST['email']);
 $phone 		= $_POST['phone'];
+$branch		= $branchh1;
 $assignShop = $_POST['asgShop']?$_POST['asgShop']:'NULL';
 $empType	= $_POST['empType'];
 $address 	= $_POST['address'];
@@ -34,7 +37,7 @@ else if($checkMailResult['email'] === $email){
 	header("Location: ".$baseURL."addEmployee.php");
 }
 else{
-	$sqlData = "UPDATE user SET name='$name', email='$email', phone='$phone', emp_type='$empType', address='$address', assign_shop='$assignShop', dte_modified='$dateTime' WHERE id='$id'  ";
+	$sqlData = "UPDATE user SET name='$name', email='$email', phone='$phone', emp_type='$empType', address='$address', branch='$branch', assign_shop='$assignShop', dte_modified='$dateTime' WHERE id='$id'  ";
 
 	if ($conn->query($sqlData) === TRUE) { 
 		$_SESSION['actStatus'] = "success";

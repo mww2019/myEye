@@ -62,6 +62,8 @@
 
             <!-- Widgets -->
             <div class="row clearfix">
+
+                <?php if($empType != 'employee') { ?>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-pink hover-expand-effect">
                         <div class="icon">
@@ -84,6 +86,7 @@
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-light-green hover-expand-effect">
                         <div class="icon">

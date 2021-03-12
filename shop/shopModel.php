@@ -8,7 +8,22 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./shop/addShopData.php">
-                        <div class="col-sm-4">
+                        <?php if($branch === ''){ ?>
+                        <div class="col-sm-12">
+                            <label for="branch">Branch</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" name="branch" id="branch" required>
+                                        <option value="">---- Select One ----</option>
+                                        <?php $i=0; foreach ($branchFetchResult as $dta) { ?>
+                                            <option value="<?= $branchFetchResult[$i]['branch_name'] ?>"><?= ucwords($branchFetchResult[$i]['branch_name']) ?></option>
+                                        <?php $i++; } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <div class="col-sm-6">
                             <label for="shop_name">Shop Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -16,23 +31,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <label for="phone">Phone</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter shop phone number" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="branch">Branch</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick" name="branch" id="branch" required>
-                                        <option>--- Select One ---</option>
-                                        <option value="a">A</option>
-                                        <option value="b">B</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -63,8 +66,23 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./shop/upShopData.php">
+                        <?php if($branch === ''){ ?>
+                        <div class="col-sm-12">
+                            <label for="branch">Branch</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" name="branch" id="branch_edit" required>
+                                        <option value="">---- Select One ----</option>
+                                        <?php $i=0; foreach ($branchFetchResult as $dta) { ?>
+                                            <option value="<?= $branchFetchResult[$i]['branch_name'] ?>"><?= ucwords($branchFetchResult[$i]['branch_name']) ?></option>
+                                        <?php $i++; } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <input type="hidden" name="shopId" id="shopId">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <label for="shop_name">Shop Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -72,23 +90,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <label for="phone">Phone</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="phone_edit" name="phone" class="form-control" placeholder="Enter shop phone number" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="branch">Emp Type</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick" name="branch" id="branch_edit" required>
-                                        <option>--- Select One ---</option>
-                                        <option value="a">A</option>
-                                        <option value="b">B</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>

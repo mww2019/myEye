@@ -15,12 +15,18 @@ $columns = array(
         5 => 'type'
     );
 
-    $sql = "SELECT u.id as id, u.name as name, u.email as email, u.phone as phone, u.emp_type as emp_type, u.address as address, s.name as assignShop FROM user as u LEFT JOIN shop as s on u.assign_shop = s.id WHERE u.branch='$branch' and u.status=1";
+    if($branch === ''){
+        $sqlQuery = "SELECT u.id as id, u.name as name, u.email as email, u.phone as phone, u.emp_type as emp_type, u.address as address, u.branch as branch, s.name as assignShop FROM user as u LEFT JOIN shop as s on u.assign_shop = s.id WHERE u.status=1";
+    } else {
+        $sqlQuery = "SELECT u.id as id, u.name as name, u.email as email, u.phone as phone, u.emp_type as emp_type, u.address as address, s.name as assignShop FROM user as u LEFT JOIN shop as s on u.assign_shop = s.id WHERE u.branch='$branch' and u.status=1";
+    }
+
+    $sql = $sqlQuery;
     $query = mysqli_query($conn, $sql) or die("Mysql Mysql Error in getting : get products");
     $totalData = mysqli_num_rows($query);
     $totalFiltered = $totalData;  
 
-    $sql = "SELECT u.id as id, u.name as name, u.email as email, u.phone as phone, u.emp_type as emp_type, u.address as address, s.name as assignShop FROM user as u LEFT JOIN shop as s on u.assign_shop = s.id WHERE u.branch='$branch' and u.status=1";
+    $sql = $sqlQuery;
     if (!empty($requestData['search']['value'])) {  
         $sql .= " AND ( u.name LIKE '" . $requestData['search']['value'] . "%' ";
         $sql .= " OR u.phone LIKE '" . $requestData['search']['value'] . "%' ";
@@ -41,6 +47,9 @@ $columns = array(
         $nestedData[] = ucwords($row["name"]);
         $nestedData[] = $row["email"];
         $nestedData[] = $row["phone"];
+        if($branch === ''){
+            $nestedData[] = $row["branch"]?ucwords($row["branch"]):'NULL';
+        }
         $nestedData[] = $row["assignShop"]?ucwords($row["assignShop"]):'NULL';
         $nestedData[] = ucwords($row["emp_type"]);
         $nestedData[] = ucwords($row["address"]);

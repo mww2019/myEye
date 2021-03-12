@@ -3,10 +3,11 @@
 // error_reporting(0);
 include_once '../comm/baseURL.php';
 session_start();
+$branchh    = $_SESSION['branch']?$_SESSION['branch']:$_POST['branch'];
 
 $name 		= strtolower($_POST['shop_name']);
 $phone 		= $_POST['phone'];
-$branch 	= $_POST['branch'];
+$branch 	= $branchh;
 $address 	= strtolower($_POST['address']);
 
 

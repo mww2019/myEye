@@ -8,6 +8,21 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./emp/addEmpData.php">
+                        <?php if($branch === ''){ ?>
+                                <div class="col-sm-12">
+                                    <label for="asgBranch">Select Branch</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <select class="form-control show-tick" name="asgSBranch" id="asgBranch" required>
+                                                <option value="">---- Select One ----</option>
+                                                <?php $i=0; foreach ($branchFetchResult as $dta) { ?>
+                                                    <option value="<?= $branchFetchResult[$i]['branch_name'] ?>"><?= ucwords($branchFetchResult[$i]['branch_name']) ?></option>
+                                                <?php $i++; } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        <?php } ?>
                                 <div class="col-sm-4">
                                     <label for="eName">Name</label>
                                     <div class="form-group">
@@ -55,6 +70,9 @@
                                             <select class="form-control show-tick" name="empType" id="empType">
                                                 <option value="employee">Employee</option>
                                                 <option value="admin">Admin</option>
+                                                <?php if($branch === ''){ ?>
+                                                    <option value="superadmin">Superadmin</option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -99,6 +117,21 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./emp/upEmpData.php">
+                        <?php if($branch === ''){ ?>
+                                <div class="col-sm-12">
+                                    <label for="asgBranch">Select Branch</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <select class="form-control show-tick" name="asgSBranch" id="asgBranch_edit" required>
+                                                <option value="">---- Select One ----</option>
+                                                <?php $i=0; foreach ($branchFetchResult as $dta) { ?>
+                                                    <option value="<?= $branchFetchResult[$i]['branch_name'] ?>"><?= ucwords($branchFetchResult[$i]['branch_name']) ?></option>
+                                                <?php $i++; } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        <?php } ?>
                                 <input type="hidden" id="empId" name="empId" >
                                 <div class="col-sm-4">
                                     <label for="eName">Name</label>
@@ -126,18 +159,21 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="empType">Emp Type</label>
-                                    <div class="">
+                                    <div class="form-group">
                                         <div class="form-line">
                                             <select class="form-control show-tick" name="empType" id="empType_edit">
                                                 <option value="employee">Employee</option>
                                                 <option value="admin">Admin</option>
+                                                <?php if($branch === ''){ ?>
+                                                    <option value="superadmin">Superadmin</option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="asgShop">Assign Shop</label>
-                                    <div class="">
+                                    <div class="form-group">
                                         <div class="form-line">
                                             <select class="form-control show-tick" name="asgShop" id="asgShop_edit" required>
                                                 <option value="">---- Select One ----</option>

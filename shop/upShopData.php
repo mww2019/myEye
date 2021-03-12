@@ -4,11 +4,12 @@ error_reporting(0);
 session_start();
 date_default_timezone_set('Asia/Kolkata');
 $dateTime 	=	date('Y-m-d H:i:s');
+$branchh    = $_SESSION['branch']?$_SESSION['branch']:$_POST['branch'];
 
 $id 		= $_POST['shopId'];
+$branch   	= $branchh;
 $name 		= strtolower($_POST['shop_name']);
 $phone 		= $_POST['phone'];
-$branch 	= $_POST['branch'];
 $address 	= strtolower($_POST['address']);
 
 include_once '../comm/db.php';
@@ -32,3 +33,4 @@ if ($conn->query($sql) === TRUE) {
 
 
 ?>
+

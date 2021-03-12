@@ -11,6 +11,7 @@
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
         $branch     = $_SESSION['branch'];
+        include_once('./comm/branchFetch.php');
 
         // if($uID != '' && $uType == 'shop'){
         //     $shopF = "SELECT * FROM shop where id='$uID' "; 
@@ -164,6 +165,9 @@
                                     <thead>
                                         <tr>
                                             <th>S.No.</th>
+                                            <?php if($branch === ''){ ?>
+                                                <th>Branch Name</th>
+                                            <?php } ?>
                                             <th>Shop Name</th>
                                             <th>Phone No.</th>
                                             <th>Address</th>

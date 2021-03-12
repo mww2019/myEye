@@ -5,7 +5,7 @@
                     <img src="./images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= ucwords($empName) ?> (<?= ucwords($empType) ?>)</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= ucwords($empName) ?> (<?= $empType ?>)</div>
                     <div class="email"><?= $empMail ?></div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
@@ -38,12 +38,20 @@
                             <span>Customer</span>
                         </a>
                     </li>
+                    <?php if($empType != 'employee') { ?>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">menu</i>
                             <span>Master</span>
                         </a>
                         <ul class="ml-menu">
+                            <?php if($branch === ''){ ?>
+                            <li>
+                                <a href="./addBranch.php">
+                                    <span>Branch</span>
+                                </a>
+                            </li>
+                            <?php } ?>
                             <li>
                                 <a href="./addShop.php">
                                     <span>Shop</span>
@@ -61,6 +69,7 @@
                             </li>
                         </ul>
                     </li>
+                    <?php } ?>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">shopping_cart</i>

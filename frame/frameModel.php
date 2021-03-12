@@ -8,15 +8,15 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./frame/addFrameData.php">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="pro_code">Frame Code</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="pro_code" name="pro_code" class="form-control" placeholder="Enter frame code" >
+                                    <input type="text" id="pro_code" name="pro_code" class="form-control" placeholder="Enter frame code" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="frame_name">Frame Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="company">Company</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="quality">Quality</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="color">Colour</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="size">Size</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label for="shape">Shape</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label for="material">Material</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <!-- <div class="col-sm-4">
                             <label for="quantity">Quantity</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -123,7 +123,7 @@
                                     <input type="text" id="tax" name="tax" class="form-control" placeholder="Enter frame tax" >
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="SUBMIT" />
                         <button type="button" class="btn btn-primary m-t-15 waves-effect" data-dismiss="modal">CLOSE</button>
