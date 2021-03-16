@@ -54,6 +54,7 @@ $columns = array(
         $nestedData[] = $row["purchase_price"];
         $nestedData[] = $row["selling_price"];
         $nestedData[] = $row["tax"];
+        $nestedData[] = $row["sellTaxPrice"];
         $nestedData[] = $row["quantity"];
         $nestedData[] = date('M, d Y', strtotime($row["pur_dte"]));
         $nestedData[] = '<button type="button" data-toggle="modal" data-target="#framePurUpModal" data-vendor='. $row['id'] .' class="btn btn-primary waves-effect actionBtn upModelBtn" title="Edit"><i class="material-icons">edit</i></button>';

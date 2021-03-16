@@ -3,13 +3,20 @@
 // error_reporting(0);
 session_start();
 include_once '../comm/baseURL.php';
-$branch_name 	= strtolower($_POST['eName']);
+$branch_name 	= strtolower(trim($_POST['eName']));
 include_once '../comm/db.php'; 
+
+$stringCount = substr_count($branch_name, ' ');
 
 $chkBranch = "SELECT * FROM branch where branch_name='$branch_name' ";
 $chkBranchResult = $conn->query($chkBranch)->fetch_array(); 
 
-if($chkBranchResult['branch_name'] === $branch_name && $chkBranchResult['status'] === '1') {
+if($stringCount > 0 || strpos($branch_name, '-')){
+	$_SESSION['actStatus'] = "error";
+	$_SESSION['actTitle'] = "Oops!";
+	$_SESSION['actMsg'] = "Branch name should be without space or (-)!";
+	header("Location: ".$baseURL."addBranch.php");
+} else if($chkBranchResult['branch_name'] === $branch_name && $chkBranchResult['status'] === '1') {
 	$_SESSION['actStatus'] = "error";
 	$_SESSION['actTitle'] = "Oops!";
 	$_SESSION['actMsg'] = "Branch already exist!";

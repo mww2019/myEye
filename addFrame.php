@@ -7,6 +7,7 @@
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
         $branch     = $_SESSION['branch'];
+        include_once('./comm/branchFetch.php');
 
 ?>
 
@@ -56,11 +57,12 @@
                                         <tr>
                                             <th>S.No.</th>
                                             <th>Frame Code</th>
-                                            <th>Product Description</th>
-                                            <th>Pur. Price(₹)</th>
+                                            <th>Frame Name</th>
+                                            <th>Price Details</th>
+                                            <!-- <th>Pur. Price(₹)</th>
                                             <th>Sell Price(₹)</th>
                                             <th>Tax(%)</th>
-                                            <th>Qty</th>
+                                            <th>Qty</th> -->
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -74,6 +76,7 @@
     </section>
 
     <?php include('./frame/frameModel.php'); ?>
+    <?php include('./frame/detailModel.php'); ?>
 
     <script src="./plugins/jquery/jquery.min.js"></script>
     <script src="./plugins/bootstrap/js/bootstrap.js"></script>
@@ -106,7 +109,7 @@
                 error: function () { 
                     $(".example -error").html("");
                     $("#frameTable").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-                    $("#example_processing").css("display", "none");
+                    $("#frameTable").css("display", "none");
                 },
                 "destroy": true
             });
@@ -169,6 +172,103 @@
                         document.getElementById('edit_pur_price').value = dataResult['purchase_price'];
                         document.getElementById('edit_sell_price').value = dataResult['selling_price'];
                         document.getElementById('edit_tax').value = dataResult['tax'];
+                    }
+                });
+        });
+
+        $(document).on('click', '.proDetails', function(e) {
+            $("#frameID1").val($(this).attr('data-vendor'));
+            var frameID = $("#frameID1").val();
+
+            $.ajax({
+                    url: "./frame/frameValue.php",
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        id: frameID
+                    },
+                    success: function(dataResult){
+                        var dataResult = JSON.parse(dataResult);
+                        var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']</strong> Frame Details';
+                        document.getElementById('detailtilte').innerHTML = combinedData;
+                        document.getElementById('fCompany').innerHTML = toUpper(dataResult['company']);
+                        document.getElementById('fGender').innerHTML = toUpper(dataResult['gender']);
+                        document.getElementById('fQuality').innerHTML = toUpper(dataResult['quality']);
+                        document.getElementById('fShape').innerHTML = toUpper(dataResult['shape']);
+                        document.getElementById('fColour').innerHTML = toUpper(dataResult['color']);
+                        document.getElementById('fMaterial').innerHTML = toUpper(dataResult['material']);
+                        document.getElementById('fSize').innerHTML = dataResult['size'];
+                        document.getElementById('fType').innerHTML = toUpper(dataResult['type']);
+                    }
+                });
+        });
+
+        $(document).on('click', '.proCode', function(e) {
+            $("#frameCode").val($(this).attr('data-vendor'));
+            var frameCode = $("#frameCode").val();
+
+            $.ajax({
+                    url: "./frame/framePriceValue.php",
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        code: frameCode
+                    },
+                    success: function(dataResult){
+                        var dataResult = JSON.parse(dataResult);
+                        if(dataResult['code'] == null) {
+                            document.getElementById('pricedetailtilte').innerHTML = 'Frame <strong>>'+frameCode+' </strong>Price Data Not Available';
+                            document.getElementById('pruPrice').innerHTML = '';
+                            document.getElementById('sePrice').innerHTML = '';
+                            document.getElementById('taxx').innerHTML = '';
+                            document.getElementById('toQuant').innerHTML = '';
+                        } else {
+                            var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']>/strong> Frame Current Price Details';
+                            document.getElementById('pricedetailtilte').innerHTML = combinedData;
+                            document.getElementById('pruPrice').innerHTML = dataResult['purchase_price'];
+                            document.getElementById('sePrice').innerHTML = dataResult['selling_price'];
+                            document.getElementById('taxx').innerHTML = dataResult['tax'];
+                            document.getElementById('toQuant').innerHTML = dataResult['quantity'];
+                        }
+                    }
+                });
+        });
+
+        $(document).on('click', '.proCodeBranch', function(e) {
+            $("#frameCodeBranch").val($(this).attr('data-vendor'));
+            document.getElementById("priceBDetails").style.display = "none";
+            document.getElementById("branchName").value = '';
+        });
+
+        $(document).on('change', '#branchName', function(e) {
+            var branch = $("#branchName").val();
+            var frameCode = $("#frameCodeBranch").val();
+
+            $.ajax({
+                    url: "./frame/framePriceValue.php",
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        code: frameCode,
+                        branch: branch
+                    },
+                    success: function(dataResult){
+                        var dataResult = JSON.parse(dataResult);
+                        document.getElementById("priceBDetails").style.display = "block";
+                        if(dataResult['code'] == null) {
+                            document.getElementById('pricedetailtilteB').innerHTML = 'Frame <strong>'+frameCode+' </strong>Price Data Not Available';
+                            document.getElementById('pruPriceB').innerHTML = '';
+                            document.getElementById('sePriceB').innerHTML = '';
+                            document.getElementById('taxxB').innerHTML = '';
+                            document.getElementById('toQuantB').innerHTML = '';
+                        } else {
+                            var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']</strong> Frame Current Price Details';
+                            document.getElementById('pricedetailtilteB').innerHTML = combinedData;
+                            document.getElementById('pruPriceB').innerHTML = dataResult['purchase_price'];
+                            document.getElementById('sePriceB').innerHTML = dataResult['selling_price'];
+                            document.getElementById('taxxB').innerHTML = dataResult['tax'];
+                            document.getElementById('toQuantB').innerHTML = dataResult['quantity'];
+                        }
                     }
                 });
         });

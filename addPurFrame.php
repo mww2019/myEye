@@ -71,6 +71,7 @@
                                             <th>Pur. Price(₹)</th>
                                             <th>Sell Price(₹)</th>
                                             <th>Tax(%)</th>
+                                            <th>Sell Tax Price(₹)</th>
                                             <th>Qty</th>
                                             <th>Pur. Date</th>
                                             <th>Action</th>

@@ -17,6 +17,9 @@ $sell_price = $_POST['sell_price']?$_POST['sell_price']:0;
 $tax 		= $_POST['tax']?$_POST['tax']:0;
 $quantity 	= $_POST['quantity']?$_POST['quantity']:0;
 
+$claP = ($sell_price*$tax)/100;
+$sellTaxPrice = number_format(floor($claP*100)/100,2, '.', '');
+
 include_once '../comm/db.php'; 
 
 $chkPro = "SELECT * FROM $branch WHERE product_code='$pro_code' ";
@@ -43,7 +46,7 @@ else{
 }
 
 
-$sqlData = "INSERT INTO product_purches (branch, pro_cat, pro_code, pro_name, sup_name, pur_dte, purchase_price, selling_price, tax, quantity) VALUES ('$branch', '$pro_cat', '$pro_code', '$pro_name', '$sup_name', '$pur_dte', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
+$sqlData = "INSERT INTO product_purches (branch, pro_cat, pro_code, pro_name, sup_name, pur_dte, purchase_price, selling_price, tax, quantity, sellTaxPrice) VALUES ('$branch', '$pro_cat', '$pro_code', '$pro_name', '$sup_name', '$pur_dte', '$pur_price' ,'$sell_price', '$tax', '$quantity', '$sellTaxPrice')";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$conn->query($sqlData1);

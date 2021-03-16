@@ -20,6 +20,9 @@ $sell_price = $_POST['sell_price'];
 $tax 		= $_POST['tax'];
 $new_quantity = 0;
 
+$claP = ($sell_price*$tax)/100;
+$sellTaxPrice = number_format(floor($claP*100)/100,2, '.', '');
+
 include_once '../comm/db.php';
 
 $chkPurQant = "SELECT quantity FROM product_purches WHERE id='$id'";
@@ -37,7 +40,7 @@ else {
 
 $sqlData1 = "UPDATE $branch SET purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$new_quantity', dte_modified='$dateTime' WHERE product_code='$pro_code'  ";
  
-$sqlData = "UPDATE product_purches SET sup_name='$sup_name', pur_dte='$pur_dte', purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$quantity', dte_modified='$dateTime' WHERE id='$id'  ";
+$sqlData = "UPDATE product_purches SET sup_name='$sup_name', pur_dte='$pur_dte', purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$quantity', sellTaxPrice='$sellTaxPrice', dte_modified='$dateTime' WHERE id='$id'  ";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$conn->query($sqlData1);
