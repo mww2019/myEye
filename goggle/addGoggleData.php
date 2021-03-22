@@ -14,10 +14,6 @@ $type 		= $_POST['type']?strtolower($_POST['type']):'NA';
 $gender		= $_POST['gender'];
 $shape 		= $_POST['shape']?strtolower($_POST['shape']):'NA';
 $material 	= $_POST['material']?strtolower($_POST['material']):'NA';
-$quantity 	= $_POST['quantity']?$_POST['quantity']:0;
-$pur_price 	= $_POST['pur_price']?$_POST['pur_price']:0;
-$sell_price = $_POST['sell_price']?$_POST['sell_price']:0;
-$tax 		= $_POST['tax']?$_POST['tax']:0;
 
 include_once '../comm/db.php'; 
 
@@ -29,7 +25,7 @@ if($resultChkCode['code'] === $pro_code) {
 	$_SESSION['actMsg'] = "Goggle code already exist!";
 	header("Location: ".$baseURL."addGoggle.php");
 } else {
-	$sqlData = "INSERT INTO product_goggle (code, name, company, quality, color, size, type, gender, shape, material, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$frame_name', '$company', '$quality', '$color', '$size', '$type', '$gender', '$shape', '$material', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
+	$sqlData = "INSERT INTO product_goggle (code, name, company, quality, color, size, type, gender, shape, material) VALUES ('$pro_code', '$frame_name', '$company', '$quality', '$color', '$size', '$type', '$gender', '$shape', '$material')";
 	if ($conn->query($sqlData) === TRUE) { 
 		$_SESSION['actStatus'] = "success";
 		$_SESSION['actTitle'] = "Good job!";

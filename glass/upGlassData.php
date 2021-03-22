@@ -18,15 +18,11 @@ $glass_index	= $_POST['index'];
 $glass_details	= $_POST['design']?$_POST['design']:'NA';
 $glass_numbers	= $_POST['numbers']?$_POST['numbers']:'NA';	 
 $glass_range	= $_POST['range']?$_POST['range']:'NA';
-$quantity 		= $_POST['quantity']?$_POST['quantity']:0;
-$pur_price 		= $_POST['pur_price']?$_POST['pur_price']:0;
-$sell_price 	= $_POST['sell_price']?$_POST['sell_price']:0;
-$tax 			= $_POST['tax']?$_POST['tax']:0;
 
 
 include_once '../comm/db.php'; 
 
-$sqlData = "UPDATE product_glass SET code='$pro_code', company='$company', glass_quality='$glass_quality', glass_color='$glass_color', glass_material='$glass_material', glass_coating='$glass_coating', glass_design='$glass_design', glass_index='$glass_index', glass_details='$glass_details', glass_numbers='glass_numbers', glass_range='glass_range',  quantity='$quantity', purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', dte_modified='$dateTime' WHERE id='$id'  ";
+$sqlData = "UPDATE product_glass SET code='$pro_code', company='$company', glass_quality='$glass_quality', glass_color='$glass_color', glass_material='$glass_material', glass_coating='$glass_coating', glass_design='$glass_design', glass_index='$glass_index', glass_details='$glass_details', glass_numbers='glass_numbers', glass_range='glass_range', tax='$tax', dte_modified='$dateTime' WHERE id='$id'  ";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$_SESSION['actStatus'] = "success";

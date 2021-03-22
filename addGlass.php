@@ -155,21 +155,17 @@
                     },
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
-                        document.getElementById('edit_pro_code').value      = dataResult['code'];
-                        document.getElementById('edit_company').value       = dataResult['company'];
-                        document.getElementById('edit_quality').value       = dataResult['glass_quality'];
-                        document.getElementById('edit_color').value         = dataResult['glass_color'];
-                        document.getElementById('edit_material').value      = dataResult['glass_material'];
-                        document.getElementById('edit_coating').value       = dataResult['glass_coating'];
-                        document.getElementById('edit_design').value        = dataResult['glass_design'];
-                        document.getElementById('edit_index').value         = dataResult['glass_index'];
-                        document.getElementById('edit_details').value       = dataResult['glass_details'];
-                        document.getElementById('edit_numbers').value       = dataResult['glass_numbers'];
-                        document.getElementById('edit_range').value         = dataResult['glass_range'];
-                        document.getElementById('edit_quantity').value      = dataResult['quantity'];
-                        document.getElementById('edit_pur_price').value     = dataResult['purchase_price'];
-                        document.getElementById('edit_sell_price').value    = dataResult['selling_price'];
-                        document.getElementById('edit_tax').value           = dataResult['tax'];
+                        document.getElementById('edit_pro_code').value = dataResult['code'];
+                        document.getElementById('edit_company').value  = dataResult['company'];
+                        document.getElementById('edit_quality').value  = dataResult['glass_quality'];
+                        document.getElementById('edit_color').value    = dataResult['glass_color'];
+                        document.getElementById('edit_material').value = dataResult['glass_material'];
+                        document.getElementById('edit_coating').value  = dataResult['glass_coating'];
+                        document.getElementById('edit_design').value   = dataResult['glass_design'];
+                        document.getElementById('edit_index').value    = dataResult['glass_index'];
+                        document.getElementById('edit_details').value  = dataResult['glass_details'];
+                        document.getElementById('edit_numbers').value  = dataResult['glass_numbers'];
+                        document.getElementById('edit_range').value    = dataResult['glass_range'];
                     }
                 });
         });

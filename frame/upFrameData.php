@@ -17,15 +17,10 @@ $type 		= $_POST['type']?strtolower($_POST['type']):'NA';
 $gender		= $_POST['gender'];
 $shape 		= $_POST['shape']?strtolower($_POST['shape']):'NA';
 $material 	= $_POST['material']?strtolower($_POST['material']):'NA';
-$quantity 	= $_POST['quantity']?$_POST['quantity']:0;
-$pur_price 	= $_POST['pur_price']?$_POST['pur_price']:0;
-$sell_price = $_POST['sell_price']?$_POST['sell_price']:0;
-$tax 		= $_POST['tax']?$_POST['tax']:0;
-
 
 include_once '../comm/db.php'; 
 
-$sqlData = "UPDATE product_frame SET code='$pro_code', name='$frame_name', company='$company', quality='$quality', color='$color', size='$size', type='$type', gender='$gender', shape='$shape', material='$material', purchase_price='$pur_price', selling_price='$sell_price', tax='$tax', quantity='$quantity', dte_modified='$dateTime' WHERE id='$id'  ";
+$sqlData = "UPDATE product_frame SET code='$pro_code', name='$frame_name', company='$company', quality='$quality', color='$color', size='$size', type='$type', gender='$gender', shape='$shape', material='$material', dte_modified='$dateTime' WHERE id='$id'  ";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$_SESSION['actStatus'] = "success";

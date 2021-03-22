@@ -8,7 +8,6 @@
         $empMail    = $_SESSION['username'];
         $branch     = $_SESSION['branch'];
         include_once('./comm/branchFetch.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -185,7 +184,7 @@
                         document.getElementById('pCompany').innerHTML = toUpper(dataResult['company']);
                         document.getElementById('pQuality').innerHTML = toUpper(dataResult['quality']);
                         document.getElementById('pVariant').innerHTML = toUpper(dataResult['variant']);
-                        document.getElementById('fColour').innerHTML = toUpper(dataResult['color']);
+                        document.getElementById('pColour').innerHTML = toUpper(dataResult['color']);
                         document.getElementById('pType').innerHTML = toUpper(dataResult['type']);
                     }
                 });

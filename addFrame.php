@@ -166,10 +166,6 @@
                         document.getElementById('edit_gender').value = dataResult['gender'];
                         document.getElementById('edit_shape').value = dataResult['shape'];
                         document.getElementById('edit_material').value = dataResult['material'];
-                        document.getElementById('edit_quantity').value = dataResult['quantity'];
-                        document.getElementById('edit_pur_price').value = dataResult['purchase_price'];
-                        document.getElementById('edit_sell_price').value = dataResult['selling_price'];
-                        document.getElementById('edit_tax').value = dataResult['tax'];
                     }
                 });
         });

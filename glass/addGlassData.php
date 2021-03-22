@@ -15,15 +15,10 @@ $glass_index	= $_POST['index'];
 $glass_details	= $_POST['design']?$_POST['design']:'NA';
 $glass_numbers	= $_POST['numbers']?$_POST['numbers']:'NA';	 
 $glass_range	= $_POST['range']?$_POST['range']:'NA';
-$quantity 		= $_POST['quantity']?$_POST['quantity']:0;
-$pur_price 		= $_POST['pur_price']?$_POST['pur_price']:0;
-$sell_price 	= $_POST['sell_price']?$_POST['sell_price']:0;
-$tax 			= $_POST['tax']?$_POST['tax']:0;
-
 
 include_once '../comm/db.php'; 
 
-$sqlData = "INSERT INTO product_glass (code, company, glass_quality, glass_color, glass_material, glass_coating, glass_design, glass_index, glass_details, glass_numbers, glass_range, quantity, purchase_price, selling_price, tax) VALUES ('$pro_code', '$company', '$glass_quality', '$glass_color', '$glass_material', '$glass_coating', '$glass_design', '$glass_index', '$glass_details', '$glass_numbers', '$glass_range', '$quantity', '$pur_price', '$sell_price', '$tax')";
+$sqlData = "INSERT INTO product_glass (code, company, glass_quality, glass_color, glass_material, glass_coating, glass_design, glass_index, glass_details, glass_numbers, glass_range) VALUES ('$pro_code', '$company', '$glass_quality', '$glass_color', '$glass_material', '$glass_coating', '$glass_design', '$glass_index', '$glass_details', '$glass_numbers', '$glass_range')";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$_SESSION['actStatus'] = "success";

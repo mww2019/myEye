@@ -26,7 +26,7 @@
                                                     <th scope="row">Colour: </th>
                                                     <td id="pVariant"></td>
                                                     <th scope="row">Material: </th>
-                                                    <td id="fColour"></td>
+                                                    <td id="pColour"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Type: </th>
