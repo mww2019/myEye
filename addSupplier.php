@@ -6,6 +6,8 @@
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
+        $branch     = $_SESSION['branch'];
+        include_once('./comm/branchFetch.php');
 
 ?>
 

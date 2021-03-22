@@ -19,21 +19,28 @@ $tax 					= $_POST['tax']?$_POST['tax']:0;
 
 include_once '../comm/db.php'; 
 
-$sqlData = "INSERT INTO product_solution (code, name, company, solution_quality, variant, solution_packing_type, solution_color, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$sol_name', '$company', '$solution_quality', '$variant', '$solution_packing_type', '$solution_color', '$pur_price', '$sell_price', '$tax', '$quantity')";
-
-if ($conn->query($sqlData) === TRUE) { 
-	$_SESSION['actStatus'] = "success";
-	$_SESSION['actTitle'] = "Good job!";
-	$_SESSION['actMsg'] = "Solution added successfully!";
-	header("Location: ".$baseURL."addSolution.php");
-} else {
+$chkCode = "SELECT * FROM product_solution WHERE code='$pro_code' ";
+$resultChkCode = $conn->query($chkCode)->fetch_array();
+if($resultChkCode['code'] === $pro_code) {
 	$_SESSION['actStatus'] = "error";
 	$_SESSION['actTitle'] = "Oops!";
-	$_SESSION['actMsg'] = "Solution not added!";
+	$_SESSION['actMsg'] = "Solution code already exist!";
 	header("Location: ".$baseURL."addSolution.php");
+} else {
+	$sqlData = "INSERT INTO product_solution (code, name, company, solution_quality, variant, solution_packing_type, solution_color, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$sol_name', '$company', '$solution_quality', '$variant', '$solution_packing_type', '$solution_color', '$pur_price', '$sell_price', '$tax', '$quantity')";
+
+	if ($conn->query($sqlData) === TRUE) { 
+		$_SESSION['actStatus'] = "success";
+		$_SESSION['actTitle'] = "Good job!";
+		$_SESSION['actMsg'] = "Solution added successfully!";
+		header("Location: ".$baseURL."addSolution.php");
+	} else {
+		$_SESSION['actStatus'] = "error";
+		$_SESSION['actTitle'] = "Oops!";
+		$_SESSION['actMsg'] = "Solution not added!";
+		header("Location: ".$baseURL."addSolution.php");
+	}
 }
-
-
 
 
 ?>

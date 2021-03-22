@@ -59,10 +59,6 @@
                                             <th>Frame Code</th>
                                             <th>Frame Name</th>
                                             <th>Price Details</th>
-                                            <!-- <th>Pur. Price(₹)</th>
-                                            <th>Sell Price(₹)</th>
-                                            <th>Tax(%)</th>
-                                            <th>Qty</th> -->
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -77,6 +73,7 @@
 
     <?php include('./frame/frameModel.php'); ?>
     <?php include('./frame/detailModel.php'); ?>
+    <?php include('./purchase/productPriceShowModel.php'); ?>
 
     <script src="./plugins/jquery/jquery.min.js"></script>
     <script src="./plugins/bootstrap/js/bootstrap.js"></script>
@@ -95,6 +92,7 @@
     <script src="./js/admin.js"></script>
     <script src="./js/pages/tables/jquery-datatable.js"></script>
     <script src="./js/demo.js"></script>
+    <script src="./purchase/productPriceShow.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -202,80 +200,7 @@
                     }
                 });
         });
-
-        $(document).on('click', '.proCode', function(e) {
-            $("#frameCode").val($(this).attr('data-vendor'));
-            var frameCode = $("#frameCode").val();
-
-            $.ajax({
-                    url: "./frame/framePriceValue.php",
-                    type: "POST",
-                    cache: false,
-                    data:{
-                        code: frameCode
-                    },
-                    success: function(dataResult){
-                        var dataResult = JSON.parse(dataResult);
-                        if(dataResult['code'] == null) {
-                            document.getElementById('pricedetailtilte').innerHTML = 'Frame <strong>>'+frameCode+' </strong>Price Data Not Available';
-                            document.getElementById('pruPrice').innerHTML = '';
-                            document.getElementById('sePrice').innerHTML = '';
-                            document.getElementById('taxx').innerHTML = '';
-                            document.getElementById('toQuant').innerHTML = '';
-                        } else {
-                            var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']>/strong> Frame Current Price Details';
-                            document.getElementById('pricedetailtilte').innerHTML = combinedData;
-                            document.getElementById('pruPrice').innerHTML = dataResult['purchase_price'];
-                            document.getElementById('sePrice').innerHTML = dataResult['selling_price'];
-                            document.getElementById('taxx').innerHTML = dataResult['tax'];
-                            document.getElementById('toQuant').innerHTML = dataResult['quantity'];
-                        }
-                    }
-                });
-        });
-
-        $(document).on('click', '.proCodeBranch', function(e) {
-            $("#frameCodeBranch").val($(this).attr('data-vendor'));
-            document.getElementById("priceBDetails").style.display = "none";
-            document.getElementById("branchName").value = '';
-        });
-
-        $(document).on('change', '#branchName', function(e) {
-            var branch = $("#branchName").val();
-            var frameCode = $("#frameCodeBranch").val();
-
-            $.ajax({
-                    url: "./frame/framePriceValue.php",
-                    type: "POST",
-                    cache: false,
-                    data:{
-                        code: frameCode,
-                        branch: branch
-                    },
-                    success: function(dataResult){
-                        var dataResult = JSON.parse(dataResult);
-                        document.getElementById("priceBDetails").style.display = "block";
-                        if(dataResult['code'] == null) {
-                            document.getElementById('pricedetailtilteB').innerHTML = 'Frame <strong>'+frameCode+' </strong>Price Data Not Available';
-                            document.getElementById('pruPriceB').innerHTML = '';
-                            document.getElementById('sePriceB').innerHTML = '';
-                            document.getElementById('taxxB').innerHTML = '';
-                            document.getElementById('toQuantB').innerHTML = '';
-                        } else {
-                            var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']</strong> Frame Current Price Details';
-                            document.getElementById('pricedetailtilteB').innerHTML = combinedData;
-                            document.getElementById('pruPriceB').innerHTML = dataResult['purchase_price'];
-                            document.getElementById('sePriceB').innerHTML = dataResult['selling_price'];
-                            document.getElementById('taxxB').innerHTML = dataResult['tax'];
-                            document.getElementById('toQuantB').innerHTML = dataResult['quantity'];
-                        }
-                    }
-                });
-        });
     </script>
-
-
-
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php if(isset($_SESSION['actStatus'])){ ?>

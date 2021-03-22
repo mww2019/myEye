@@ -1,11 +1,11 @@
-<!-- Frame Detail Model -->
-    <div class="modal fade" id="frameDetailsModal" tabindex="-1" role="dialog">
+<!-- Goggle Detail Model -->
+    <div class="modal fade" id="goggleDetailsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="">
-                        <input type="hidden" name="frameID1" id="frameID1">
+                        <input type="hidden" name="goggleID1" id="goggleID1">
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="card">
@@ -18,27 +18,27 @@
                                             <tbody>
                                                 <tr>
                                                     <th scope="row">Company: </th>
-                                                    <td id="fCompany"></td>
+                                                    <td id="pCompany"></td>
                                                     <th scope="row">Gender: </th>
-                                                    <td id="fGender"></td>
+                                                    <td id="pGender"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Quality: </th>
-                                                    <td id="fQuality"></td>
+                                                    <td id="pQuality"></td>
                                                     <th scope="row">Shape: </th>
-                                                    <td id="fShape"></td>
+                                                    <td id="pShape"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Colour: </th>
-                                                    <td id="fColour"></td>
+                                                    <td id="pColour"></td>
                                                     <th scope="row">Material: </th>
-                                                    <td id="fMaterial"></td>
+                                                    <td id="pMaterial"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Size: </th>
-                                                    <td id="fSize"></td>
+                                                    <td id="pSize"></td>
                                                     <th scope="row">Type: </th>
-                                                    <td id="fType"></td>
+                                                    <td id="pType"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -53,4 +53,3 @@
         </div>
     </div>
 
-    

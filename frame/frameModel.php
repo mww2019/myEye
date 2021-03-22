@@ -148,7 +148,7 @@
                             <label for="pro_code">Frame Code</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="edit_pro_code" name="pro_code" class="form-control" placeholder="Enter frame code" >
+                                    <input type="text" id="edit_pro_code" name="pro_code" class="form-control" placeholder="Enter frame code" readonly>
                                 </div>
                             </div>
                         </div>

@@ -19,7 +19,6 @@ $columns = array(
 
 
     $sql = "SELECT id,code,name FROM product_frame WHERE status=1";
-    // $sql = "SELECT pf.id as id, pf.code as code, pf.name as name, b.purchase_price as purchase_price, b.selling_price as selling_price, b.tax as tax, b.quantity as quantity FROM product_frame as pf LEFT JOIN $branch as b on pf.code = b.product_code WHERE pf.status = 1";
 
     $query = mysqli_query($conn, $sql) or die("Mysql1 Error in getting : get products");
     $totalData = mysqli_num_rows($query);
@@ -43,23 +42,16 @@ $columns = array(
     while ($row = mysqli_fetch_array($query)) {  
         $nestedData = array();
         $nestedData[] = $no;
+
         $nestedData[] = '<a data-toggle="modal" data-target="#frameDetailsModal" data-vendor='. $row['id'] .' class="waves-effect actionBtn proDetails">'.$row["code"].'</a>';
+        
         $nestedData[] = ucwords($row["name"]);
 
         if($branch === ''){
-            $nestedData[] = '<a data-toggle="modal" data-target="#framePriceDetailsBranchModal" data-vendor='. $row['code'] .' class="btn btn-primary waves-effect actionBtn proCodeBranch">SHOW</a>';
+            $nestedData[] = '<a data-toggle="modal" data-target="#productPriceDetailsBranchModal" data-vendor='. $row['code'] .' class="btn btn-primary waves-effect actionBtn proCodeBranch">SHOW</a>';
         } else {
-            $nestedData[] = '<a data-toggle="modal" data-target="#framePriceDetailsModal" data-vendor='. $row['code'] .' class="btn btn-primary waves-effect actionBtn proCode">SHOW</a>';
+            $nestedData[] = '<a data-toggle="modal" data-target="#productPriceDetailsModal" data-vendor='. $row['code'] .' class="btn btn-primary waves-effect actionBtn proCode">SHOW</a>';
         }
-        
-
-        // $nestedData[] = 'Name: '.$row["name"].'</br>Comapny: '.$row["company"].'</br>Quality: '.$row["quality"].'</br>Colour: '.$row["color"].'</br>Size: '.$row["size"].'</br>Type: '.$row["type"].'</br>Gender: '.$row["gender"].'</br>Shape: '.$row["shape"].'</br>Material: '.$row["material"];
-
-        // $nestedData[] = $row["purchase_price"];
-        // $nestedData[] = $row["selling_price"];
-        // $nestedData[] = $row["tax"];
-        // $nestedData[] = $row["quantity"];
-        // $nestedData[] = 'NA';
 
         $nestedData[] = '<button type="button" data-toggle="modal" data-target="#frameUpModal" data-vendor='. $row['id'] .' class="btn btn-primary waves-effect actionBtn upModelBtn" title="Edit"><i class="material-icons">edit</i></button>&nbsp;&nbsp;<button onclick="delFrame('. $row['id'] .')" type="button" class="btn btn-danger waves-effect actionBtn" title="Delete"><i class="material-icons">delete</i></button>';
 

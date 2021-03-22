@@ -8,15 +8,15 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./goggle/addGoggleData.php">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="pro_code">Goggle Code</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="pro_code" name="pro_code" class="form-control" placeholder="Enter goggle code" >
+                                    <input type="text" id="pro_code" name="pro_code" class="form-control" placeholder="Enter goggle code" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="goggle_name">Goggle Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="company">Company</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="quality">Quality</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="color">Colour</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="size">Size</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="gender">Gender</label>
-                            <div class="">
+                            <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick" name="gender" id="gender">
                                         <option value="unisex">Unisex</option>
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label for="shape">Shape</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -84,43 +84,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label for="material">Material</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="material" name="material" class="form-control" placeholder="Enter goggle material" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="quantity">Quantity</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Enter goggle quantity" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="pur_price">Pruchase Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="pur_price" name="pur_price" class="form-control" placeholder="Enter goggle purchase price" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="sell_price">Selling Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="sell_price" name="sell_price" class="form-control" placeholder="Enter goggle selling price" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="tax">Tax (%)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="tax" name="tax" class="form-control" placeholder="Enter goggle tax" >
                                 </div>
                             </div>
                         </div>
@@ -134,7 +102,7 @@
     </div>
 
 
-<!-- Add Goggle Model -->
+<!-- Update Goggle Model -->
     <div class="modal fade" id="goggleUpModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -145,15 +113,15 @@
                 <div class="modal-body">
                     <form method="post" action="./goggle/upGoggleData.php">
                         <input type="hidden" name="goggleID" id="goggleID">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="pro_code">Goggle Code</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="edit_pro_code" name="pro_code" class="form-control" placeholder="Enter goggle code" >
+                                    <input type="text" id="edit_pro_code" name="pro_code" class="form-control" placeholder="Enter goggle code" readonly>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="goggle_name">Goggle Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -161,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="company">Company</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -169,7 +137,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="quality">Quality</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -177,7 +145,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="color">Colour</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -185,7 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="size">Size</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -203,7 +171,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="gender">Gender</label>
-                            <div class="">
+                            <div class="form-group">
                                 <div class="form-line">
                                     <select class="form-control show-tick" name="gender" id="edit_gender">
                                         <option value="unisex">Unisex</option>
@@ -213,7 +181,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label for="shape">Shape</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -221,43 +189,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label for="material">Material</label>
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="edit_material" name="material" class="form-control" placeholder="Enter goggle material" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="quantity">Quantity</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="number" id="edit_quantity" name="quantity" class="form-control" placeholder="Enter goggle quantity" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="pur_price">Pruchase Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="edit_pur_price" name="pur_price" class="form-control" placeholder="Enter goggle purchase price" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="sell_price">Selling Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="edit_sell_price" name="sell_price" class="form-control" placeholder="Enter goggle selling price" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="tax">Tax (%)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="edit_tax" name="tax" class="form-control" placeholder="Enter goggle tax" >
                                 </div>
                             </div>
                         </div>

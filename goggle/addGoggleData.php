@@ -19,21 +19,28 @@ $pur_price 	= $_POST['pur_price']?$_POST['pur_price']:0;
 $sell_price = $_POST['sell_price']?$_POST['sell_price']:0;
 $tax 		= $_POST['tax']?$_POST['tax']:0;
 
-
 include_once '../comm/db.php'; 
 
-$sqlData = "INSERT INTO product_goggle (code, name, company, quality, color, size, type, gender, shape, material, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$frame_name', '$company', '$quality', '$color', '$size', '$type', '$gender', '$shape', '$material', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
-
-if ($conn->query($sqlData) === TRUE) { 
-	$_SESSION['actStatus'] = "success";
-	$_SESSION['actTitle'] = "Good job!";
-	$_SESSION['actMsg'] = "Goggle added successfully!";
-	header("Location: ".$baseURL."addGoggle.php");
-} else {
+$chkCode = "SELECT code FROM product_goggle WHERE code='$pro_code' ";
+$resultChkCode = $conn->query($chkCode)->fetch_array();
+if($resultChkCode['code'] === $pro_code) {
 	$_SESSION['actStatus'] = "error";
 	$_SESSION['actTitle'] = "Oops!";
-	$_SESSION['actMsg'] = "Goggle not added!";
+	$_SESSION['actMsg'] = "Goggle code already exist!";
 	header("Location: ".$baseURL."addGoggle.php");
+} else {
+	$sqlData = "INSERT INTO product_goggle (code, name, company, quality, color, size, type, gender, shape, material, purchase_price, selling_price, tax, quantity) VALUES ('$pro_code', '$frame_name', '$company', '$quality', '$color', '$size', '$type', '$gender', '$shape', '$material', '$pur_price' ,'$sell_price', '$tax', '$quantity')";
+	if ($conn->query($sqlData) === TRUE) { 
+		$_SESSION['actStatus'] = "success";
+		$_SESSION['actTitle'] = "Good job!";
+		$_SESSION['actMsg'] = "Goggle added successfully!";
+		header("Location: ".$baseURL."addGoggle.php");
+	} else {
+		$_SESSION['actStatus'] = "error";
+		$_SESSION['actTitle'] = "Oops!";
+		$_SESSION['actMsg'] = "Goggle not added!";
+		header("Location: ".$baseURL."addGoggle.php");
+	}
 }
 
 

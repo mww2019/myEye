@@ -3,7 +3,7 @@
     session_start();
 
     if($_SESSION['valid'] === true){
-        $title      = 'glass';
+        $title      = 'other';
         $tData      = 'product_'.$title;
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
@@ -11,9 +11,7 @@
         $branch     = $_SESSION['branch'];
         include_once('./comm/branchFetch.php');
         include_once('./purchase/autoData.php');
-
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -105,7 +103,7 @@
     } ?>
     
 </body>
-
 </html>
+
 
 <?php }else{ header('Refresh: 2; URL = login.php'); } ?>

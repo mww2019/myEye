@@ -1,11 +1,11 @@
 <!-- Frame Detail Model -->
-    <div class="modal fade" id="frameDetailsModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="otherProductDetailsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="">
-                        <input type="hidden" name="frameID1" id="frameID1">
+                        <input type="hidden" name="otherPID1" id="otherPID1">
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="card">
@@ -18,27 +18,21 @@
                                             <tbody>
                                                 <tr>
                                                     <th scope="row">Company: </th>
-                                                    <td id="fCompany"></td>
-                                                    <th scope="row">Gender: </th>
-                                                    <td id="fGender"></td>
-                                                </tr>
-                                                <tr>
+                                                    <td id="pCompany"></td>
                                                     <th scope="row">Quality: </th>
-                                                    <td id="fQuality"></td>
-                                                    <th scope="row">Shape: </th>
-                                                    <td id="fShape"></td>
+                                                    <td id="pQuality"></td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Colour: </th>
-                                                    <td id="fColour"></td>
-                                                    <th scope="row">Material: </th>
-                                                    <td id="fMaterial"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Size: </th>
-                                                    <td id="fSize"></td>
                                                     <th scope="row">Type: </th>
-                                                    <td id="fType"></td>
+                                                    <td id="pType"></td>
+                                                    <th scope="row">Colour: </th>
+                                                    <td id="pColour"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Shape: </th>
+                                                    <td id="pShape"></td>
+                                                    <th scope="row">Size: </th>
+                                                    <td id="pSize"></td>
                                                 </tr>
                                             </tbody>
                                         </table>

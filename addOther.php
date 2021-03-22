@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Add Solution | My Eye Care</title>
+    <title>Add Other Product | My Eye Care</title>
     <?php include('./comm/headerLinks.php') ?>
     <style type="text/css">
         .actionBtn{
@@ -43,21 +43,21 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                SOLUTION'S DATA 
-                                &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#solutionAddModal">
+                                OTHER PRODUCT'S DATA 
+                                &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#otherProductAddModal">
                                         <i class="material-icons">add_box</i>
-                                        <span>SOLUTION</span>
+                                        <span>OTHER PRODUCT</span>
                                 </button>
                             </h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="solutionTable">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="otherProductTable">
                                     <thead>
                                         <tr>
                                             <th>S.No.</th>
-                                            <th>Solution Code</th>
-                                            <th>Solution Name</th>
+                                            <th>Frame Code</th>
+                                            <th>Frame Name</th>
                                             <th>Price Details</th>
                                             <th>Action</th>
                                         </tr>
@@ -71,8 +71,8 @@
         </div>
     </section>
 
-    <?php include('./solution/solutionModel.php'); ?>
-    <?php include('./solution/detailModel.php'); ?>
+    <?php include('./otherProduct/otherProductModel.php'); ?>
+    <?php include('./otherProduct/detailModel.php'); ?>
     <?php include('./purchase/productPriceShowModel.php'); ?>
 
     <script src="./plugins/jquery/jquery.min.js"></script>
@@ -96,17 +96,17 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#solutionTable').DataTable({
+            $('#otherProductTable').DataTable({
                 "responsive": true,
                 "processing": true,
                 "serverSide": true,
                 "bJQueryUI": true,
                 "ajax": {
-                    url: "./solution/fetchSolutionData.php"
+                    url: "./otherProduct/fetchOtherProductData.php"
                 },
                 error: function () { 
                     $(".example -error").html("");
-                    $("#solutionTable").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                    $("#otherProductTable").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
                     $("#example_processing").css("display", "none");
                 },
                 "destroy": true
@@ -116,19 +116,19 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
-        function delSolution(id){
+        function delOtherProduct(id){
             swal({
               title: "Are you sure?",
-              text: "want to delete solution details!",
+              text: "want to delete product details!",
               icon: "warning",
               buttons: true,
               dangerMode: true,
             })
             .then((willDelete) => {
               if (willDelete) {
-                window.location.href = "<?= $baseURL ?>solution/delSolution.php?id="+id;
+                window.location.href = "<?= $baseURL ?>otherProduct/delOtherProduct.php?id="+id;
               } else {
-                swal("solution details are not going to delete!");
+                swal("Product details are not going to delete!");
               }
             });
         }
@@ -144,49 +144,51 @@
              }
 
         $(document).on('click', '.upModelBtn', function(e) {
-            $("#solutionID").val($(this).attr('data-vendor'));
-            var solutionID = $("#solutionID").val();
+            $("#otherPID").val($(this).attr('data-vendor'));
+            var otherPID = $("#otherPID").val();
 
             $.ajax({
-                    url: "./solution/solutionValue.php",
+                    url: "./otherProduct/otherProductValue.php",
                     type: "POST",
                     cache: false,
                     data:{
-                        id: solutionID
+                        id: otherPID
                     },
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
-                        document.getElementById('edit_pro_code').value   = dataResult['code'];
-                        document.getElementById('edit_sol_name').value   = dataResult['name'];
-                        document.getElementById('edit_company').value    = dataResult['company'];
-                        document.getElementById('edit_quality').value    = dataResult['quality'];
-                        document.getElementById('edit_variant').value    = dataResult['variant'];
-                        document.getElementById('edit_pak_type').value   = dataResult['type'];
-                        document.getElementById('edit_color').value      = dataResult['color'];
+                        document.getElementById('edit_pro_code').value  = dataResult['code'];
+                        document.getElementById('edit_name').value      = dataResult['name'];
+                        document.getElementById('edit_company').value   = dataResult['company'];
+                        document.getElementById('edit_quality').value   = dataResult['quality'];
+                        document.getElementById('edit_type').value      = dataResult['type'];
+                        document.getElementById('edit_color').value     = dataResult['color'];
+                        document.getElementById('edit_shape').value     = dataResult['shape'];
+                        document.getElementById('edit_size').value      = dataResult['size'];
                     }
                 });
         });
 
         $(document).on('click', '.proDetails', function(e) {
-            $("#solutionID1").val($(this).attr('data-vendor'));
-            var solutionID = $("#solutionID1").val();
+            $("#otherPID1").val($(this).attr('data-vendor'));
+            var otherPID = $("#otherPID1").val();
 
             $.ajax({
-                    url: "./solution/solutionValue.php",
+                    url: "./otherProduct/otherProductValue.php",
                     type: "POST",
                     cache: false,
                     data:{
-                        id: solutionID
+                        id: otherPID
                     },
                     success: function(dataResult){
                         var dataResult = JSON.parse(dataResult);
-                        var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']</strong> Solution Details';
+                        var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']</strong> Product Details';
                         document.getElementById('detailtilte').innerHTML = combinedData;
                         document.getElementById('pCompany').innerHTML = toUpper(dataResult['company']);
                         document.getElementById('pQuality').innerHTML = toUpper(dataResult['quality']);
-                        document.getElementById('pVariant').innerHTML = toUpper(dataResult['variant']);
-                        document.getElementById('fColour').innerHTML = toUpper(dataResult['color']);
                         document.getElementById('pType').innerHTML = toUpper(dataResult['type']);
+                        document.getElementById('pColour').innerHTML = toUpper(dataResult['color']);
+                        document.getElementById('pShape').innerHTML = toUpper(dataResult['shape']);
+                        document.getElementById('pSize').innerHTML = dataResult['size'];
                     }
                 });
         });

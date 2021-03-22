@@ -6,6 +6,8 @@
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
+        $branch     = $_SESSION['branch'];
+        include_once('./comm/branchFetch.php');
 
 ?>
 
@@ -55,11 +57,8 @@
                                         <tr>
                                             <th>S.No.</th>
                                             <th>Goggle Code</th>
-                                            <th>Product Description</th>
-                                            <th>Pur. Price(₹)</th>
-                                            <th>Sell Price(₹)</th>
-                                            <th>Tax(%)</th>
-                                            <th>Qty</th>
+                                            <th>Goggle Name</th>
+                                            <th>Price Details</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -73,6 +72,8 @@
     </section>
 
     <?php include('./goggle/goggleModel.php'); ?>
+    <?php include('./goggle/detailModel.php'); ?>
+    <?php include('./purchase/productPriceShowModel.php'); ?>
 
     <script src="./plugins/jquery/jquery.min.js"></script>
     <script src="./plugins/bootstrap/js/bootstrap.js"></script>
@@ -91,6 +92,7 @@
     <script src="./js/admin.js"></script>
     <script src="./js/pages/tables/jquery-datatable.js"></script>
     <script src="./js/demo.js"></script>
+    <script src="./purchase/productPriceShow.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -164,10 +166,33 @@
                         document.getElementById('edit_gender').value     = dataResult['gender'];
                         document.getElementById('edit_shape').value      = dataResult['shape'];
                         document.getElementById('edit_material').value   = dataResult['material'];
-                        document.getElementById('edit_quantity').value   = dataResult['quantity'];
-                        document.getElementById('edit_pur_price').value  = dataResult['purchase_price'];
-                        document.getElementById('edit_sell_price').value = dataResult['selling_price'];
-                        document.getElementById('edit_tax').value        = dataResult['tax'];
+                    }
+                });
+        });
+
+        $(document).on('click', '.proDetails', function(e) {
+            $("#goggleID1").val($(this).attr('data-vendor'));
+            var goggleID = $("#goggleID1").val();
+
+            $.ajax({
+                    url: "./goggle/goggleValue.php",
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        id: goggleID
+                    },
+                    success: function(dataResult){
+                        var dataResult = JSON.parse(dataResult);
+                        var combinedData = '<strong>'+dataResult['code']+' ['+toUpper(dataResult['name'])+']</strong> Goggle Details';
+                        document.getElementById('detailtilte').innerHTML = combinedData;
+                        document.getElementById('pCompany').innerHTML = toUpper(dataResult['company']);
+                        document.getElementById('pGender').innerHTML = toUpper(dataResult['gender']);
+                        document.getElementById('pQuality').innerHTML = toUpper(dataResult['quality']);
+                        document.getElementById('pShape').innerHTML = toUpper(dataResult['shape']);
+                        document.getElementById('pColour').innerHTML = toUpper(dataResult['color']);
+                        document.getElementById('pMaterial').innerHTML = toUpper(dataResult['material']);
+                        document.getElementById('pSize').innerHTML = dataResult['size'];
+                        document.getElementById('pType').innerHTML = toUpper(dataResult['type']);
                     }
                 });
         });

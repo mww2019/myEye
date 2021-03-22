@@ -6,6 +6,7 @@
         $empName    = $_SESSION['uName'];
         $empType    = $_SESSION['empType'];
         $empMail    = $_SESSION['username'];
+        include_once('./comm/branchFetch.php');
 
 ?>
 
@@ -55,11 +56,8 @@
                                         <tr>
                                             <th>S.No.</th>
                                             <th>Glass Code</th>
-                                            <th>Description</th>
-                                            <th>Pur. Price(₹)</th>
-                                            <th>Sell Price(₹)</th>
-                                            <th>Tax(%)</th>
-                                            <th>Qty</th>
+                                            <th>Glass Name</th>
+                                            <th>Price Details</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -73,6 +71,8 @@
     </section>
 
     <?php include('./glass/glassModel.php'); ?>
+    <?php include('./glass/detailModel.php'); ?>
+    <?php include('./purchase/productPriceShowModel.php'); ?>
 
     <script src="./plugins/jquery/jquery.min.js"></script>
     <script src="./plugins/bootstrap/js/bootstrap.js"></script>
@@ -91,6 +91,7 @@
     <script src="./js/admin.js"></script>
     <script src="./js/pages/tables/jquery-datatable.js"></script>
     <script src="./js/demo.js"></script>
+    <script src="./purchase/productPriceShow.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -172,10 +173,36 @@
                     }
                 });
         });
-    </script>
 
+        $(document).on('click', '.proDetails', function(e) {
+            $("#glassID1").val($(this).attr('data-vendor'));
+            var glassID = $("#glassID1").val();
 
+            $.ajax({
+                    url: "./glass/glassValue.php",
+                    type: "POST",
+                    cache: false,
+                    data:{
+                        id: glassID
+                    },
+                    success: function(dataResult){
+                        var dataResult = JSON.parse(dataResult);
+                        document.getElementById('detailtilte').innerHTML = '<strong>['+dataResult['code']+'</strong>] Glass Details';
+                        document.getElementById('pCompany').innerHTML = toUpper(dataResult['company']);
+                        document.getElementById('pQuality').innerHTML = toUpper(dataResult['glass_quality']);
+                        document.getElementById('pColour').innerHTML = toUpper(dataResult['glass_color']);
+                        document.getElementById('pMaterial').innerHTML = toUpper(dataResult['glass_material']);
+                        document.getElementById('pCoating').innerHTML = toUpper(dataResult['glass_coating']);
+                        document.getElementById('pDesign').innerHTML = toUpper(dataResult['glass_design']);
+                        document.getElementById('pIndex').innerHTML = dataResult['glass_index'];
+                        document.getElementById('pDetail').innerHTML = dataResult['glass_details'];
+                        document.getElementById('pNumberes').innerHTML = dataResult['glass_numbers'];
+                        document.getElementById('pRange').innerHTML = dataResult['glass_range'];
+                    }
+                });
+        });
 
+</script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php if(isset($_SESSION['actStatus'])){ ?>

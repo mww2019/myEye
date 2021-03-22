@@ -1,5 +1,5 @@
 <?php
 
-	$baseURL = 'http://localhost/eye/';
+	$baseURL = 'http://localhost/eye2/';
 
 ?>

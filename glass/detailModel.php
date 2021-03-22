@@ -1,11 +1,11 @@
-<!-- Frame Detail Model -->
-    <div class="modal fade" id="frameDetailsModal" tabindex="-1" role="dialog">
+<!-- Glass Detail Model -->
+    <div class="modal fade" id="glassDetailsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="">
-                        <input type="hidden" name="frameID1" id="frameID1">
+                        <input type="hidden" name="glassID1" id="glassID1">
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="card">
@@ -18,27 +18,33 @@
                                             <tbody>
                                                 <tr>
                                                     <th scope="row">Company: </th>
-                                                    <td id="fCompany"></td>
-                                                    <th scope="row">Gender: </th>
-                                                    <td id="fGender"></td>
-                                                </tr>
-                                                <tr>
+                                                    <td id="pCompany"></td>
                                                     <th scope="row">Quality: </th>
-                                                    <td id="fQuality"></td>
-                                                    <th scope="row">Shape: </th>
-                                                    <td id="fShape"></td>
+                                                    <td id="pQuality"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Colour: </th>
-                                                    <td id="fColour"></td>
+                                                    <td id="pColour"></td>
                                                     <th scope="row">Material: </th>
-                                                    <td id="fMaterial"></td>
+                                                    <td id="pMaterial"></td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Size: </th>
-                                                    <td id="fSize"></td>
-                                                    <th scope="row">Type: </th>
-                                                    <td id="fType"></td>
+                                                    <th scope="row">Coating: </th>
+                                                    <td id="pCoating"></td>
+                                                    <th scope="row">Design: </th>
+                                                    <td id="pDesign"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Index: </th>
+                                                    <td id="pIndex"></td>
+                                                    <th scope="row">Details: </th>
+                                                    <td id="pDetail"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Numbers: </th>
+                                                    <td id="pNumberes"></td>
+                                                    <th scope="row">Range: </th>
+                                                    <td id="pRange"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -52,5 +58,3 @@
             </div>
         </div>
     </div>
-
-    

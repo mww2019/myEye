@@ -8,16 +8,15 @@
                 <hr/>
                 <div class="modal-body">
                     <form method="post" action="./solution/addSolutionData.php">
-
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="pro_code">Solution Code</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="pro_code" name="pro_code" class="form-control" placeholder="Enter solution code" autocomplete="off" >
+                                    <input type="text" id="pro_code" name="pro_code" class="form-control" placeholder="Enter solution code" autocomplete="off" required >
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="sol_name">Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -30,7 +29,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="company">Company</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -76,39 +75,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <label for="quantity">Quantity</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Enter solution quantity" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label for="pur_price">Pruchase Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="pur_price" name="pur_price" class="form-control" placeholder="Enter solution purchase price" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="sell_price">Selling Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="sell_price" name="sell_price" class="form-control" placeholder="Enter solution selling price" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="tax">Tax (%)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="tax" name="tax" class="form-control" placeholder="Enter solution tax" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
 
                         <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="SUBMIT" />
                         <button type="button" class="btn btn-primary m-t-15 waves-effect" data-dismiss="modal">CLOSE</button>
@@ -130,15 +96,15 @@
                 <div class="modal-body">
                     <form method="post" action="./solution/upSolutionData.php">
                         <input type="hidden" name="solutionID" id="solutionID">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="pro_code">Solution Code</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="edit_pro_code" name="pro_code" class="form-control" placeholder="Enter solution code" autocomplete="off" >
+                                    <input type="text" id="edit_pro_code" name="pro_code" class="form-control" placeholder="Enter solution code" autocomplete="off" readonly >
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="sol_name">Name</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -151,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <label for="company">Company</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -194,39 +160,6 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="edit_color" name="color" class="form-control" placeholder="Enter solution colour" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="quantity">Quantity</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="number" id="edit_quantity" name="quantity" class="form-control" placeholder="Enter solution quantity" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label for="pur_price">Pruchase Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="edit_pur_price" name="pur_price" class="form-control" placeholder="Enter solution purchase price" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="sell_price">Selling Price (₹)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="edit_sell_price" name="sell_price" class="form-control" placeholder="Enter solution selling price" autocomplete="off" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="tax">Tax (%)</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="edit_tax" name="tax" class="form-control" placeholder="Enter solution tax" autocomplete="off" >
                                 </div>
                             </div>
                         </div>

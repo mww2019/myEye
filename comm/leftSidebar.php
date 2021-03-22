@@ -102,7 +102,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./addPurOtherProduct.php">
+                                <a href="./addPurOther.php">
                                     <span>Other Products</span>
                                 </a>
                             </li>
@@ -140,7 +140,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="./addOtherProduct.php">
+                                <a href="./addOther.php">
                                     <span>Other Products</span>
                                 </a>
                             </li>
