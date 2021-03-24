@@ -18,6 +18,15 @@ $glass_range	= $_POST['range']?$_POST['range']:'NA';
 
 include_once '../comm/db.php'; 
 
+$chkCode = "SELECT * FROM product_glass WHERE code='$pro_code' ";
+$resultChkCode = $conn->query($chkCode)->fetch_array();
+if($resultChkCode['code'] === $pro_code) {
+	$_SESSION['actStatus'] = "error";
+	$_SESSION['actTitle'] = "Oops!";
+	$_SESSION['actMsg'] = "Glass code already exist!";
+	header("Location: ".$baseURL."addGlass.php");
+} else {
+
 $sqlData = "INSERT INTO product_glass (code, company, glass_quality, glass_color, glass_material, glass_coating, glass_design, glass_index, glass_details, glass_numbers, glass_range) VALUES ('$pro_code', '$company', '$glass_quality', '$glass_color', '$glass_material', '$glass_coating', '$glass_design', '$glass_index', '$glass_details', '$glass_numbers', '$glass_range')";
 
 if ($conn->query($sqlData) === TRUE) { 
@@ -32,7 +41,7 @@ if ($conn->query($sqlData) === TRUE) {
 	header("Location: ".$baseURL."addGlass.php");
 }
 
-
+}
 
 
 ?>
