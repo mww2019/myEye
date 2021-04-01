@@ -38,12 +38,26 @@
                             <span>Customer</span>
                         </a>
                     </li>
+
                     <li>
-                        <a href="addReceipt.php">
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">person</i>
                             <span>Receipt</span>
                         </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="./addReceipt.php">
+                                    <span>Add Receipt</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./allReceipt.php">
+                                    <span>All Receipt</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                     <?php if($empType != 'employee') { ?>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">

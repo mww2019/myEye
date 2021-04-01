@@ -1,9 +1,17 @@
+<?php
+
+include_once('./receipt/branchProduct.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Test</title>
+
+
 </head>
 <body>
 	<div class="control-group" >
@@ -16,7 +24,14 @@
 				<th></th>
 			</tr>
 			<tr>
-				<td><input type="text" name="a[]"></td>
+				<td>
+					<select name="a[]" id="a1" required>
+						<option value="">---- Select One ----</option>
+						<?php $i=0; foreach ($productFetchResult as $dta) { ?>
+                            <option value="<?= $productFetchResult[$i]['product_code'] ?>"><?= ucwords($productFetchResult[$i]['product_cat']).' - '.$productFetchResult[$i]['product_code'].' ['.ucwords($productFetchResult[$i]['product_name']).']' ?></option>
+                        <?php $i++; } ?>
+					</select>
+				</td>
 				<td><input type="text" id="b1" name="b[]" ></td>
 				<td><input type="text" id="c1" name="c[]" ></td>
 				<td><input class="price" type="text" id="1" name="d[]"></td>
@@ -40,15 +55,19 @@
 		document.getElementById(id).value = tPrice;
 		// console.log(tPrice);
 	});
+
+	$(document).on('change', '#a'+rowCount, function(){
+		console.log('hello');
+	});
 </script>
 <script type="text/javascript">
 	var rowCount = 1;
 	$("#addNewTeam").click(function(){
 		rowCount++;
-		var elem1 = $("<input/>",{
+		var elem1 = $("<select/>",{
 	        type: "text",
 	        name: "a[]",
-	        value: rowCount
+	        id: "a"+rowCount
 	    });
 	    var elem2 = $("<input/>",{
 	        type: "text",
@@ -86,9 +105,37 @@
 
 	    $("#teamArea").append(content);
 
+	    $.ajax({
+	    	url: './receipt/branchProductAjax.php',
+	    	data: "", 
+	    	dataType: 'json',
+            success: function(rows){
+            	// var dataResult = JSON.parse(dataResult);
+            	var select = document.getElementById('a'+rowCount);
+            	var opt = document.createElement('option');
+            	opt.value = '';
+				opt.innerHTML = '---- Select One ----';
+				select.appendChild(opt);
+            	for (var i in rows) {
+				    var row = rows[i];          
+				    var pCat = row[2];
+				    var pCode = row[3];
+				    var pName = row[4];
+				    
+				    var opt = document.createElement('option');
+				    opt.value = pCode;
+				    opt.innerHTML = pCat.charAt(0).toUpperCase()+pCat.slice(1)+' - '+pCode+' ['+pName.charAt(0).toUpperCase()+pName.slice(1)+']';
+				    select.appendChild(opt);
+				}
+            }
+	    });
+
+
 	    // $("#teamArea").append(elem1).append(elem2).append(elem3).append(elem4).append(removeLink);
 	    // $("#teamArea").append('<tr><td>'+elem1+'</td>').append('<td>'+elem2+'</td>').append('<td>'+elem3+'</td>').append('<td>'+elem4+'</td>').append('<td>'+removeLink+'</td></tr>');
 	});
+
+	
 </script>
 </body>
 </html>
