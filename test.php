@@ -1,141 +1,199 @@
 <?php
+include_once './comm/db.php'; 
 
-include_once('./receipt/branchProduct.php');
+if(isset($_POST['but_import'])){
+   $target_dir = "uploads/";
+   $target_file = $target_dir . basename($_FILES["importfile"]["name"]);
 
+   $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+   $uploadOk = 1;
+   if($imageFileType != "csv" ) {
+     $uploadOk = 0;
+   }
+
+   if ($uploadOk != 0) {
+      if (move_uploaded_file($_FILES["importfile"]["tmp_name"], $target_dir.'importfile.csv')) {
+
+        // Checking file exists or not
+        $target_file = $target_dir . 'importfile.csv';
+        $fileexists = 0;
+        if (file_exists($target_file)) {
+           $fileexists = 1;
+        }
+        if ($fileexists == 1 ) {
+
+           // Reading file
+           $file = fopen($target_file,"r");
+           $i = 0;
+
+           $importData_arr = array();
+                       
+           while (($data = fgetcsv($file, 1000, ",")) !== FALSE) {
+             $num = count($data);
+
+             for ($c=0; $c < $num; $c++) {
+                $importData_arr[$i][] = mysqli_real_escape_string($conn, $data[$c]);
+             }
+             $i++;
+           }
+           fclose($file);
+
+           $skip = 0;
+           // insert import data
+           foreach($importData_arr as $data){
+              if($skip != 0){
+              	// $username = $data[0];
+              	// $cust_id = strtoupper(substr($username, 0, 3)).''.date('ydis');
+               //  $fname = $data[1];
+               //  $lname = $data[2];
+               //  $email = $data[3];
+
+                $branch = $data[0]?strtolower($data[0]):'NA';
+                $shop	= $data[1]?strtolower($data[1]):'NA';
+                $name 	= $data[2]?strtolower($data[2]):'NA';
+                $email 	= $data[3]?strtolower($data[3]):'NA';
+                $phone 	= $data[4]?$data[4]:'NA';
+                $age 	= $data[5]?$data[5]:'NA';
+                $gender = $data[6]?strtolower($data[6]):'NA';
+                $address = $data[7]?$data[7]:'NA';
+                $cust_id = strtoupper(substr($name, 0, 3)).''.substr($phone, 3, 4).''.date('is');
+
+                 // Checking duplicate entry
+                $sql = "select count(*) as allcount from test where phone='" . $phone . "' ";
+
+                 $retrieve_data = mysqli_query($conn,$sql);
+                 $row = mysqli_fetch_array($retrieve_data);
+                 $count = $row['allcount'];
+
+                 if($count == 0){
+                    // Insert record
+                    $insert_query = "insert into test(branch,cust_id,shop,name,email,phone,age,gender,address) values('".$branch."','".$cust_id."','".$shop."','".$name."','".$email."','".$phone."','".$age."','".$gender."','".$address."')";
+                    mysqli_query($conn,$insert_query);
+                 }
+              }
+              $skip ++;
+           }
+           $newtargetfile = $target_file;
+           if (file_exists($newtargetfile)) {
+              unlink($newtargetfile);
+           }
+         }
+
+      }
+   } else {
+   	 $error = "Only upload CSV file";
+   }
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Test</title>
+<style>
+	.popup_import{
+  border: 1px solid black;
+  width: 550px;
+  height: auto;
+  background: white;
+  border-radius: 3px;
+  margin: 0 auto;
+  padding: 5px;
+}
 
+.format{
+  color: red;
+}
 
-</head>
-<body>
-	<div class="control-group" >
-		<table id="teamArea">
-			<tr>
-				<th>Description</th>
-				<th>Quatity</th>
-				<th>Unit Amt.</th>
-				<th>Amount</th>
-				<th></th>
-			</tr>
-			<tr>
-				<td>
-					<select name="a[]" id="a1" required>
-						<option value="">---- Select One ----</option>
-						<?php $i=0; foreach ($productFetchResult as $dta) { ?>
-                            <option value="<?= $productFetchResult[$i]['product_code'] ?>"><?= ucwords($productFetchResult[$i]['product_cat']).' - '.$productFetchResult[$i]['product_code'].' ['.ucwords($productFetchResult[$i]['product_name']).']' ?></option>
-                        <?php $i++; } ?>
-					</select>
-				</td>
-				<td><input type="text" id="b1" name="b[]" ></td>
-				<td><input type="text" id="c1" name="c[]" ></td>
-				<td><input class="price" type="text" id="1" name="d[]"></td>
-				<td><a id="addNewTeam" style="cursor: pointer;">Add another</a></td>
-			</tr>
-		</table>
-	    <!-- <div id="teamArea"class="controls">
-	      <input type="text" name="a[]">
-	      <input type="text" name="b[]">
-	      <input type="text" name="c[]">
-	    </div> -->
-	</div>
+#userTable{
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 550px;
+}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).on('click', '.price', function(){
-		var id = this.id;
-		var quant = $("#b"+id).val();
-		var uPrice = $("#c"+id).val();
-		var tPrice = quant*uPrice;
-		document.getElementById(id).value = tPrice;
-		// console.log(tPrice);
-	});
+#but_import{
+  margin-left: 10px;
+}
+</style>
+<!-- Import form (start) -->
+<div class="popup_import">
+ <form method="post" action="" enctype="multipart/form-data" id="import_form">
+  <table width="100%">
 
-	$(document).on('change', '#a'+rowCount, function(){
-		console.log('hello');
-	});
-</script>
-<script type="text/javascript">
-	var rowCount = 1;
-	$("#addNewTeam").click(function(){
-		rowCount++;
-		var elem1 = $("<select/>",{
-	        type: "text",
-	        name: "a[]",
-	        id: "a"+rowCount
-	    });
-	    var elem2 = $("<input/>",{
-	        type: "text",
-	        name: "b[]",
-	        id: "b"+rowCount
-	    });
-	    var elem3 = $("<input/>",{
-	        type: "text",
-	        name: "c[]",
-	        id: "c"+rowCount
-	    });
-	    var elem4 = $("<input/>",{
-	        type: "text",
-	        name: "d[]",
-	        id: rowCount,
-	        class: "price"
-	    });
-	    
-	    var removeLink = $("<span style='cursor: pointer;' />").html("X").click(function(){
-	        // $(elem1).remove();
-	        // $(elem2).remove();
-	        // $(elem3).remove();
-	        // $(elem4).remove();
-	        // $(this).remove();
-	        content.remove();
-	    });
+   <tr>
+    <td colspan="2">
+     <input type='file' name="importfile" id="importfile">
+    </td>
+   </tr>
+   <tr>
+    <td colspan="2" ><input type="submit" id="but_import" name="but_import" value="Import"></td>
+   </tr>
+   <tr>
+    <td colspan="2" align="center"><span class="format">Username, First name, Last name,Email</span> </td>
+    </tr>
+    <?php if($error) { ?>
+    	<tr><td colspan="2" align="center"><span class="format"><?= $error ?></span> </td></tr>
+    <?php } ?>
+   <tr>
+    <td colspan="2" align="center"><a href="import_example.csv" target="_blank">Download Sample</a></td>
+   </tr>
 
-	    var content = $('<tr>').append(
-	    					$('<td/>').append(elem1),
-	    					$('<td/>').append(elem2),
-	    					$('<td/>').append(elem3),
-	    					$('<td/>').append(elem4),
-	    					$('<td/>').append(removeLink)
-	    					);	    			
+   <tr>
+    <td colspan="2"><b>Instruction : </b><br/>
+     <ul>
+      <li>Enclose text field in quotes (' , " ) if text contains comma (,) is used.</li>
+      <li>Enclose text field in single quotes (') if text contains double quotes (")</li>
+      <li>Enclose text field in double quotes (") if text contains single quotes (')</li>
+     </ul>
+    </td>
+   </tr>
+  </table>
+ </form>
+</div>
+<!-- Import form (end) -->
 
-	    $("#teamArea").append(content);
+<!-- Displaying imported users -->
+<table border="1" id="userTable">
+  <tr>
+   <td>S.no</td>
+   <td>Branch</td>
+   <td>Cust ID</td>
+   <td>Shop</td>
+   <td>Name</td>
+   <td>Email</td>
+   <td>Phone</td>
+   <td>Age</td>
+   <td>Gender</td>
+   <td>Address</td>
+  </tr>
+  <?php
+    $sql = "select * from test order by id desc limit 10";
+    $sno = 1;
+    $retrieve_data = mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_array($retrieve_data)){
+        $id = $row['id'];
+        $branch = $row['branch'];
+        $cust_id = $row['cust_id'];
+        $shop	= $row['shop'];
+        $name 	= $row['name'];
+        $email 	= $row['email'];
+        $phone 	= $row['phone'];
+        $age 	= $row['age'];
+        $gender = $row['gender'];
+        $address = $row['address'];
 
-	    $.ajax({
-	    	url: './receipt/branchProductAjax.php',
-	    	data: "", 
-	    	dataType: 'json',
-            success: function(rows){
-            	// var dataResult = JSON.parse(dataResult);
-            	var select = document.getElementById('a'+rowCount);
-            	var opt = document.createElement('option');
-            	opt.value = '';
-				opt.innerHTML = '---- Select One ----';
-				select.appendChild(opt);
-            	for (var i in rows) {
-				    var row = rows[i];          
-				    var pCat = row[2];
-				    var pCode = row[3];
-				    var pName = row[4];
-				    
-				    var opt = document.createElement('option');
-				    opt.value = pCode;
-				    opt.innerHTML = pCat.charAt(0).toUpperCase()+pCat.slice(1)+' - '+pCode+' ['+pName.charAt(0).toUpperCase()+pName.slice(1)+']';
-				    select.appendChild(opt);
-				}
-            }
-	    });
+        echo "<tr>
+            <td>".$sno."</td>
+            <td>".$branch."</td>
+            <td>".$cust_id."</td>
+            <td>".$shop."</td>
+            <td>".$name."</td>
+            <td>".$email."</td>
+            <td>".$phone."</td>
+            <td>".$age."</td>
+            <td>".$gender."</td>
+            <td>".$address."</td>
 
-
-	    // $("#teamArea").append(elem1).append(elem2).append(elem3).append(elem4).append(removeLink);
-	    // $("#teamArea").append('<tr><td>'+elem1+'</td>').append('<td>'+elem2+'</td>').append('<td>'+elem3+'</td>').append('<td>'+elem4+'</td>').append('<td>'+removeLink+'</td></tr>');
-	});
-
-	
-</script>
-</body>
-</html>
+        </tr>";
+        $sno++;
+    }
+   ?>
+</table>

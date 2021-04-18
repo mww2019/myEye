@@ -10,6 +10,9 @@
         $branch     = $_SESSION['branch'];
         include_once('./comm/branchFetch.php');
         include_once('./receipt/branchProduct.php');
+        if($_GET['id']){
+            include_once('./customer/individualCustData.php');
+        }
 
 ?>
 
@@ -73,7 +76,7 @@
                                         <label for="cust_phone">Customer Phone No.</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" id="cust_phone" name="cust_phone" class="form-control" placeholder="Enter customer phone no." onkeypress="return check(event,value)" required>
+                                                <input type="text" id="cust_phone" name="cust_phone" class="form-control" placeholder="Enter customer phone no." value="<?php if($_GET['id']){ echo $custFetchResult[0]['phone']; } ?>" onkeypress="return check(event,value)" required>
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +84,7 @@
                                         <label for="cust_name">Customer Name</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" id="cust_name" name="cust_name" class="form-control" placeholder="Enter customer name" required>
+                                                <input type="text" id="cust_name" name="cust_name" class="form-control" placeholder="Enter customer name" value="<?php if($_GET['id']){ echo ucwords($custFetchResult[0]['name']); } ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +104,7 @@
                                         <label for="cust_add">Customer Address</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" id="cust_add" name="cust_add" class="form-control" placeholder="Enter customer address" >
+                                                <input type="text" id="cust_add" name="cust_add" class="form-control" placeholder="Enter customer address" value="<?php if($_GET['id']){ echo $custFetchResult[0]['address']; } ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -341,7 +344,7 @@
             success: function(dataResult){
                 var dataResult = JSON.parse(dataResult);
                 if(dataResult['id'] !== null) {
-                    console.log("data received");
+                    // console.log("data received");
                     document.getElementById('cust_name').value = toUpper(dataResult['name']);
                     document.getElementById('gender').value = dataResult['gender'];
                     document.getElementById('cust_add').value = toUpper(dataResult['address']);

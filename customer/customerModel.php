@@ -223,3 +223,88 @@
             </div>
         </div>
     </div>
+
+<!-- Customer Description -->
+    <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">PRODUCT DESCRIPTION</h4>
+                </div>
+                <hr style="margin-top: 10px; margin-bottom: 0px;" />
+                <div class="modal-body">
+                    <form method="post" >
+                        <input type="hidden" name="custSaleID" id="custSaleID">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="form-line" style="border-bottom:0px solid #ddd;">
+                                    <span id="desc"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary m-t-15 waves-effect" data-dismiss="modal">CLOSE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Customer Balance Payment -->
+    <div class="modal fade" id="balPaymentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">PRODUCT DESCRIPTION</h4>
+                </div>
+                <hr style="margin-top: 10px; margin-bottom: 0px;" />
+                <div class="modal-body">
+                    <form method="post" action="./receipt/addBalPay.php">
+                        <input type="hidden" name="custSaleID1" id="custSaleID1">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="form-line" style="border-bottom:0px solid #ddd;">
+                                    <span id="desc1"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="totAmt">Total Amt(₹)</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="totAmt" name="totAmt" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="paidAmt">Paid Amt(₹)</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="paidAmt" name="paidAmt" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="balAmt">Balance Amt(₹)</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="balAmt" name="balAmt" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="payNow">Enter Amt(₹)</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="payNow" name="payNow" class="form-control" placeholder="Enter Amount" onkeypress="return check(event,value)" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="SUBMIT" />
+                        <button type="button" class="btn btn-primary m-t-15 waves-effect" data-dismiss="modal">CLOSE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

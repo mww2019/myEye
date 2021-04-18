@@ -25,6 +25,9 @@
         .actionBtn{
             padding: 2px 5px;
         }
+        .card .header {
+            border-bottom: 1px solid rgb(21 21 21 / 35%);
+        }
     </style>
 </head>
 
@@ -37,7 +40,43 @@
         <?php include_once('./comm/rightSidebar.php') ?>
     </section>
 
-    <section class="content">
+    <section class="content" style="margin-bottom: 0px;">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="card" style="background-color: #cddc395e; margin-bottom: 15px;">
+                            <div class="header">
+                                <h2><strong>IMPORT CUSTOMERS DATA (only .CSV file)</strong>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn bg-red waves-effect" href="importfile.csv">Download File Format</a></h2>
+                            </div>
+                            <div class="body">
+                                <div>
+                                    <div class="tab-content">
+                                        <div  class="" id="profile_settings">
+                                            <form class="form-horizontal" method="post" action="./customer/importData.php" enctype="multipart/form-data" id="import_form">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3"></div>
+                                                    <div class="col-sm-5">
+                                                        <div class="form-line">
+                                                            <input type='file' name="importfile" id="importfile" class="form-control show-tick" required>
+                                                        </div>
+                                                    </div>
+                                                    <input class="col-sm-2 btn btn-primary waves-effect" type="submit" id="but_import" name="but_import" value="Import">
+                                                    <div class="col-sm-2">
+                                                        <!-- <a class="btn btn-primary waves-effect" href="importfile.csv">Download File Format</a> -->
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="content" style="margin-top:0px">
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

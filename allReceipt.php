@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>All Sales | My Eye Care</title>
+    <title>All Receipt | My Eye Care</title>
     <?php include('./comm/headerLinks.php') ?>
     <style type="text/css">
         .actionBtn{
@@ -44,7 +44,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                ALL SALE'S DATA 
+                                ALL RECEIPT'S DATA 
                                 &nbsp;&nbsp;&nbsp;<a class="btn btn-primary waves-effect" href="addReceipt.php">
                                         <i class="material-icons">add_box</i>
                                         <span>RECEIPT</span></a>
@@ -67,6 +67,7 @@
                                             <th>Balance Amt(₹)</th>
                                             <th>Notes</th>
                                             <th>Date</th>
+                                            <th>Receipt</th>
                                         </tr>
                                     </thead>
                                 </table>

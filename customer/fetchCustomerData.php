@@ -31,6 +31,7 @@ $columns = array(
     $sql = $sqlquery;
     if (!empty($requestData['search']['value'])) {  
         $sql .= " AND ( cust_id LIKE '" . $requestData['search']['value'] . "%' ";
+        $sql .= " OR shop LIKE '" . $requestData['search']['value'] . "%' ";
         $sql .= " OR name LIKE '" . $requestData['search']['value'] . "%' ";
         $sql .= " OR phone LIKE '" . $requestData['search']['value'] . "%' )";
     }
@@ -49,7 +50,7 @@ $columns = array(
         if($branch === ''){
             $nestedData[] = ucwords($row["branch"]);
         }
-        $nestedData[] = $row["cust_id"];
+        $nestedData[] = '<a href="custAllData.php?id='.$row["cust_id"].'">'.$row["cust_id"].'</a>';
         $nestedData[] = ucwords($row["shop"]);
         $nestedData[] = ucwords($row["name"]);
         $nestedData[] = $row["phone"];

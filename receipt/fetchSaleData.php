@@ -49,7 +49,7 @@ $columns = array(
         if($branch === ''){
             $nestedData[] = ucwords($row["branch"]);
         }
-        $nestedData[] = $row["cust_id"];
+        $nestedData[] = '<a href="custAllData.php?id='.$row["cust_id"].'">'.$row["cust_id"].'</a>';
         $nestedData[] = ucwords($row["shop"]);
         $nestedData[] = $row["total_amt"];
         $nestedData[] = $row["discount"];
@@ -57,6 +57,7 @@ $columns = array(
         $nestedData[] = $row["amt_bal"];
         $nestedData[] = $row["notes"];
         $nestedData[] = date('M, d Y', strtotime($row["dte_created"]));
+        $nestedData[] = '<a href="receipt.php?id='.$row["id"].'" target="_blank"><i class="material-icons" title="Print Receipt">print</i></a>';
 
         $data[] = $nestedData;
         $no++;

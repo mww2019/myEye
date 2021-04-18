@@ -13,18 +13,25 @@ $quantity 		= $_POST['b'];
 $uAmout 		= $_POST['c'];
 $amount 		= $_POST['d'];
 
+// echo "<pre>";
+// print_r($description);
+// echo "</pre>";
+// echo "<pre>";
+// print_r($quantity);
+// echo "</pre>";
+
 $no = count($description);
 $data = array();
 for($i=0;$i<$no;$i++){
 	$data[] = $description[$i].','.$quantity[$i].','.$uAmout[$i].','.$amount[$i];  //total table data
 
 	$pro_code = $description[$i];
-	$quantity = $quantity[$i];
+	$quant = $quantity[$i];
 
-	$chkPro = "SELECT * FROM $branch WHERE product_code='$pro_code' ";
+	$chkPro = "SELECT quantity FROM $branch WHERE product_code='$pro_code' ";
 	$chkProResult = $conn->query($chkPro)->fetch_array();
 	$preQuant = $chkProResult['quantity'];
-	$newQuant = $preQuant - $quantity;
+	$newQuant = $preQuant - $quant;
 
 	$sqlData1 = "UPDATE $branch SET quantity='$newQuant', dte_modified='$dateTime' WHERE product_code='$pro_code'  ";
 	$conn->query($sqlData1);
@@ -32,7 +39,9 @@ for($i=0;$i<$no;$i++){
 	// die;
 
 }
-
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 $shop 		= $_POST['asgShop'];
 $custPhone 	= $_POST['cust_phone'];
@@ -40,12 +49,21 @@ $custName 	= strtolower($_POST['cust_name']);
 $gender 	= $_POST['gender'];
 $address 	= $_POST['cust_add']?$_POST['cust_add']:'NA';
 $discript  	= implode('|',$data);
+
+// echo $discript;
+// die;
+
 $totAmt 	= $_POST['tot_amt'];
 $discount 	= $_POST['discount'];
 $amtPaid 	= $_POST['paid_amt'];
 $amtBal 	= $_POST['bal_amt'];
 $notes 		= $_POST['cust_notes']?$_POST['cust_notes']:'NA';
 
+if($amtBal == 0){
+	$sale_status = 'paid';
+} else {
+	$sale_status = 'balance';
+}
 
 
 $chkPhone = "SELECT * FROM customer WHERE phone='$custPhone' and status=1 ";
@@ -59,7 +77,7 @@ if($resultChkPhone['phone'] !== $custPhone) {
 
 }
 
-$sqlData = "INSERT INTO sales (cust_id, cust_phone, branch, shop, total_amt, discount, amt_paid, amt_bal, notes, description) VALUES ('$cust_id', '$custPhone', '$branch', '$shop', '$totAmt', '$discount', '$amtPaid', '$amtBal', '$notes', '$discript')";
+$sqlData = "INSERT INTO sales (cust_id, cust_phone, branch, shop, total_amt, discount, amt_paid, amt_bal, sale_status, notes, description) VALUES ('$cust_id', '$custPhone', '$branch', '$shop', '$totAmt', '$discount', '$amtPaid', '$amtBal', '$sale_status', '$notes', '$discript')";
 
 if ($conn->query($sqlData) === TRUE) { 
 	$_SESSION['actStatus'] = "success";
