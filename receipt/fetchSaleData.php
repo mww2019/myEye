@@ -57,7 +57,7 @@ $columns = array(
         $nestedData[] = $row["amt_bal"];
         $nestedData[] = $row["notes"];
         $nestedData[] = date('M, d Y', strtotime($row["dte_created"]));
-        $nestedData[] = '<a href="receipt.php?id='.$row["id"].'" target="_blank"><i class="material-icons" title="Print Receipt">print</i></a>';
+        $nestedData[] = '<a href="receipt.php?id='.$row["id"].'&fr=allSale" target="_blank"><i class="material-icons" title="Print Receipt">print</i></a>';
 
         $data[] = $nestedData;
         $no++;

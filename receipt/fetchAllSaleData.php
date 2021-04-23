@@ -39,16 +39,16 @@ $columns = array(
 
     if($shop === ''){
         if($branch === '') {
-            $sqlquery = "SELECT s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
+            $sqlquery = "SELECT s.id as sid, s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
         } else {
-            $sqlquery = "SELECT s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND s.branch='$branch' AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
+            $sqlquery = "SELECT s.id as sid, s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND s.branch='$branch' AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
         }
 
     } else {
         if($branch === '') {
-            $sqlquery = "SELECT s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND s.shop='$shop' AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
+            $sqlquery = "SELECT s.id as sid, s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND s.shop='$shop' AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
         } else {
-            $sqlquery = "SELECT s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND s.shop='$shop' AND s.branch='$branch' AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
+            $sqlquery = "SELECT s.id as sid, s.cust_id as cust_id, c.name as name, c.phone as phone, c.address as address, s.shop as shop, s.total_amt as amt, s.notes as notes, s.dte_created as sDate FROM sales as s LEFT JOIN customer as c on s.cust_id = c.cust_id WHERE s.sale_status='paid' AND s.status=1 AND s.shop='$shop' AND s.branch='$branch' AND (DATE(s.dte_created) BETWEEN '$from' AND '$to')";
         }
     }
 
@@ -85,7 +85,7 @@ $columns = array(
         $nestedData[] = $row["amt"];
         $nestedData[] = $row["notes"];
         $nestedData[] = date('M, d Y', strtotime($row["sDate"]));
-        $nestedData[] = 'hello';
+        $nestedData[] = '<a href="receipt.php?id='.$row["sid"].'&fr=finalSale" target="_blank"><i class="material-icons" title="Print Receipt">print</i></a>';
         // $nestedData[] = '<a href="custAllData.php?id='.$row["cust_id"].'">'.$row["cust_id"].'</a>';
         // $nestedData[] = ucwords($row["shop"]);
         // $nestedData[] = $row["total_amt"];

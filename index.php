@@ -65,51 +65,58 @@
 
                 <?php if($empType != 'employee') { ?>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-pink hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">shop</i>
+                    <a href="addCustomer.php" >
+                        <div class="info-box bg-pink hover-expand-effect" style="cursor: pointer !important;">
+                            <div class="icon">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">NEW CUSTOMERS</div>
+                                <div class="number count-to" data-from="0" data-to="<?= $todayCustData ?>" data-speed="1" data-fresh-interval="1"><?= $todayCustData ?></div>
+                            </div>
                         </div>
-                        <div class="content">
-                            <div class="text">SHOP</div>
-                            <div class="number count-to" data-from="0" data-to="<?= $shopFetchResult['totalShop'] ?>" data-speed="1" data-fresh-interval="1"></div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">person</i>
+                    <a href="allSale.php" >
+                        <div class="info-box bg-cyan hover-expand-effect" style="cursor: pointer !important;">
+                            <div class="icon">
+                                <i class="material-icons">shop</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">NEW SALE</div>
+                                <div class="number count-to" data-from="0" data-to="<?= $todaySaleData ?>" data-speed="1" data-fresh-interval="1"><?= $todaySaleData ?> <small>&#8377;</small></div>
+                            </div>
                         </div>
-                        <div class="content">
-                            <div class="text">Employee</div>
-                            <div class="number count-to" data-from="0" data-to="<?= $empFetchResult['totalEmp'] ?>" data-speed="1" data-fresh-interval="1"></div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
-                <?php } ?>
-                <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-light-green hover-expand-effect">
                         <div class="icon">
-                            <i class="material-icons">forum</i>
+                            <i class="material-icons">shopping_cart</i>
                         </div>
                         <div class="content">
-                            <div class="text">NEW COMMENTS</div>
-                            <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="text">NEW PURCHASE</div>
+                            <div class="number count-to" data-from="0" data-to="<?= $todayPurData ?>" data-speed="1000" data-fresh-interval="20"><?= $todayPurData ?> <small>&#8377;</small></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-orange hover-expand-effect">
                         <div class="icon">
-                            <i class="material-icons">person_add</i>
+                            <i class="material-icons">message</i>
                         </div>
                         <div class="content">
-                            <div class="text">NEW VISITORS</div>
+                            <div class="text">MESSAGE</div>
                             <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
-                </div> -->
+                </div>
+                <?php } ?>
+
             </div>
+           
+
             <!-- #END# Widgets -->
             <!-- CPU Usage -->
             <!-- <div class="row clearfix">
@@ -145,11 +152,11 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>  -->
             <!-- #END# CPU Usage -->
-            <!-- <div class="row clearfix">
-                Visitors -->
-                <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="row clearfix">
+                <!-- Visitors -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="card">
                         <div class="body bg-pink">
                             <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
@@ -174,74 +181,66 @@
                             </ul>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <!-- #END# Visitors -->
                 <!-- Latest Social Trends -->
-                <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="card">
                         <div class="body bg-cyan">
-                            <div class="m-b--35 font-bold">LATEST SOCIAL TRENDS</div>
+                            <div class="m-b--35 font-bold">PRODUCT PURCHASE <?= strtoupper(date('F Y')) ?></div>
                             <ul class="dashboard-stat-list">
                                 <li>
-                                    #socialtrends
-                                    <span class="pull-right">
-                                        <i class="material-icons">trending_up</i>
-                                    </span>
+                                    FRAMES
+                                    <span class="pull-right"><b><?= $frame ?></b> <small>&#8377;</small></span>
                                 </li>
                                 <li>
-                                    #materialdesign
-                                    <span class="pull-right">
-                                        <i class="material-icons">trending_up</i>
-                                    </span>
+                                    GLASSES
+                                    <span class="pull-right"><b><?= $glass ?></b> <small>&#8377;</small></span>
                                 </li>
-                                <li>#adminbsb</li>
-                                <li>#freeadmintemplate</li>
-                                <li>#bootstraptemplate</li>
                                 <li>
-                                    #freehtmltemplate
-                                    <span class="pull-right">
-                                        <i class="material-icons">trending_up</i>
-                                    </span>
+                                    LANSES
+                                    <span class="pull-right"><b><?= $lense ?></b> <small>&#8377;</small></span>
+                                </li>
+                                <li>
+                                    GOGGLES
+                                    <span class="pull-right"><b><?= $goggle ?></b> <small>&#8377;</small></span>
+                                </li>
+                                <li>
+                                    SOLUTIONS
+                                    <span class="pull-right"><b><?= $solution ?></b> <small>&#8377;</small></span>
+                                </li>
+                                <li>
+                                    OTHER PRODUCTS
+                                    <span class="pull-right"><b><?= $other ?></b> <small>&#8377;</small></span>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </div> -->
+                </div> 
                 <!-- #END# Latest Social Trends -->
                 <!-- Answered Tickets -->
-                <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="card">
                         <div class="body bg-teal">
-                            <div class="font-bold m-b--35">ANSWERED TICKETS</div>
+                            <div class="font-bold m-b--35">SALE <?= strtoUpper(date('F Y')) ?></div>
                             <ul class="dashboard-stat-list">
+                                <?php foreach($resultNoShops as $dta){ ?>
                                 <li>
-                                    TODAY
-                                    <span class="pull-right"><b>12</b> <small>TICKETS</small></span>
+                                    <?= strtoUpper($dta['name']) ?>
+                                    <span class="pull-right">
+                                    <?php
+                                        include './comm/db.php';
+                                        $shopN = $dta['name'];
+                                        $tAmt = "SELECT SUM(amt_paid) as totalAmt FROM sales WHERE sale_status='paid' AND shop='$shopN' AND MONTH(dte_created)=MONTH(CURRENT_DATE())";
+                                        $tAmtResult = $conn->query($tAmt)->fetch_array();
+                                     ?>
+                                    <b><?= $tAmtResult['totalAmt'] ?></b> <small>&#8377;</small></span>
                                 </li>
-                                <li>
-                                    YESTERDAY
-                                    <span class="pull-right"><b>15</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    LAST WEEK
-                                    <span class="pull-right"><b>90</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    LAST MONTH
-                                    <span class="pull-right"><b>342</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    LAST YEAR
-                                    <span class="pull-right"><b>4 225</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    ALL
-                                    <span class="pull-right"><b>8 752</b> <small>TICKETS</small></span>
-                                </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>
-                </div> -->
+                </div> 
                 <!-- #END# Answered Tickets -->
             </div> 
 

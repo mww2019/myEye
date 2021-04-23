@@ -11,14 +11,25 @@
         // include_once('./comm/branchFetch.php');
         include './comm/db.php';
         $id = $_GET['id'];
-        // echo $id;
+        $type = $_GET['fr'];
+        // echo $id.' - '.$type;
+        // die;
         $rDFetch = "SELECT * FROM sales WHERE id='$id' "; 
 		$rDFetchResult = $conn->query($rDFetch)->fetch_all(MYSQLI_ASSOC);
+
+		// echo "<pre>";
+		// print_r($rDFetchResult);
+		// echo "</pre>";
+		// die;
 
 		$cust_id = $rDFetchResult[0]['cust_id'];
 		$custFetch = "SELECT * FROM customer WHERE cust_id='$cust_id' ";
 		$custFetchResult = $conn->query($custFetch)->fetch_all(MYSQLI_ASSOC);
 
+
+		$shop = $rDFetchResult[0]['shop'];
+		$shopFetch = "SELECT * FROM shop WHERE name='$shop' AND branch='$branch' ";
+		$shopFetchResult = $conn->query($shopFetch)->fetch_all(MYSQLI_ASSOC);
 		// $descp = explode('|',$rDFetchResult[0]['description']);
 		// foreach($descp as $dd){
 		// 	$inExplode = explode(',', $dd);
@@ -29,7 +40,7 @@
 		// $brh = 	$rDFetchResult[0]['branch'];
 
 		// echo "<pre>";
-		// print_r($descp);
+		// print_r($shopFetchResult);
 		// echo "</pre>";
 		// die;
 
@@ -52,10 +63,10 @@
 							<th align="left">MY EYE CARE OPTICAL</th>
 							<th>INVOICE</th>
 						</tr>
-						<tr><td colspan="2">Mukhani Chowraha</td></tr>
-						<tr><td colspan="2">Haldwani, Nainital, Uttarakhand</td></tr>
-						<tr><td colspan="2">Phone: +91-9815865478</td></tr>
-						<tr><td colspan="2">Email: myeyecare@gmail.com</td></tr>
+						<tr><td colspan="2"><?= ucwords($shopFetchResult[0]['name']) ?></td></tr>
+						<tr><td colspan="2"><?= ucwords($shopFetchResult[0]['address']) ?></td></tr>
+						<tr><td colspan="2">Phone: <?= $shopFetchResult[0]['phone'] ?></td></tr>
+						<!-- <tr><td colspan="2">Email: myeyecare@gmail.com</td></tr> -->
 					</table>
 				</td>
 			</tr>
@@ -133,19 +144,22 @@
 						</tr>
 						<tr>
 							<td width="50%">&nbsp;</td><td width="15%"></td>
-							<th style="border-left:solid 1px #333;" width="20%">Paid Amt</th>
-							<td style="border-left:solid 1px #333; border-right:solid 1px #333;" width="25%">
+							<th style="border:solid 1px #333;" width="20%">
+								<?php if($type != 'allSale'){?>Gross Amount<?php } else { ?>Paid Amt<?php } ?></th>
+							<td style="border:solid 1px #333;" width="25%">
 						<?php $paidAmt = ($rDFetchResult[0]['total_amt']-$rDFetchResult[0]['amt_bal'])-$rDFetchResult[0]['discount'];
 								echo $paidAmt;
 								 ?>
 							</td>
 						</tr>
+						<?php if($type == 'allSale'){ ?>
 						<tr>
 							<td width="50%">&nbsp;</td>
 							<td width="15%"></td>
 							<th style="border:solid 1px #333; border-right:0px;" width="20%">Balance Amt</th>
 							<td style="border:solid 1px #333;" width="25%"><?= $rDFetchResult[0]['amt_bal'] ?></td>
 						</tr>
+					<?php } ?>
 					</table>
 				</td>
 			</tr>
